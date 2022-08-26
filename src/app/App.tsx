@@ -6,8 +6,8 @@ import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../common/hooks/hooks';
 import { HeaderContainer } from '../components/header/HeaderContainer';
-import { ErrorSnackBar } from '../components/Snackbars/ErrorSnackbar';
-import { SuccessSnackBar } from '../components/Snackbars/SuccessSnackbar';
+import { ErrorSnackBar } from '../components/snackbars/ErrorSnackbar';
+import { SuccessSnackBar } from '../components/snackbars/SuccessSnackbar';
 import { NotFound } from '../pages/404/NotFound';
 import { LearnPage } from '../pages/learnPage/LearnPage';
 import { Login } from '../pages/login/Login';
