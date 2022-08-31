@@ -44,7 +44,7 @@ export const CardsPage = memo(() => {
   // Get and update cards
   useEffect(() => {
     if (id) {
-      dispatch(getCards(id));
+      dispatch(getCards(id, pageCount));
     }
   }, [dispatch, page, cardQuestion, pageCount, sortCards, id]);
 

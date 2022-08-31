@@ -50,7 +50,6 @@ export const Pagination: FC<PropsType> = ({ location }) => {
 
     setRowsPerPage(newValue);
     setPage(1);
-    dispatch(setPagination(page, newValue));
     if (currentPlaceIsPacks) dispatch(setPagination(page, newValue));
     else dispatch(setCardsPagination(page, newValue));
   };
