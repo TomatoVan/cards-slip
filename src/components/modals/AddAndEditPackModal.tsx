@@ -3,8 +3,9 @@ import React, { FC, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useFormik } from 'formik';
+import { useSearchParams } from 'react-router-dom';
 
-import { useAppDispatch } from '../../common/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { addPack, changePackName } from '../../pages/packsList/packsReducer';
 import { Button } from '../button/Button';
 import { Input } from '../input/Input';
@@ -30,8 +31,13 @@ export const AddAndEditPackModal: FC<PropsType> = ({
   id,
   name,
 }) => {
+  const profileUserId = useAppSelector(state => state.profile._id);
   const dispatch = useAppDispatch();
   let packName = '';
+
+  // to find query
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentFilter = searchParams.get('accessory');
 
   // for edit
   if (name) packName = name;
@@ -68,10 +74,19 @@ export const AddAndEditPackModal: FC<PropsType> = ({
         privatePack: values.privatePack,
       };
 
+      // profileUserId and currentFilter for My/All packs correct refresh
       if (id) {
-        dispatch(changePackName(id, data.packName, data.privatePack));
+        dispatch(
+          changePackName(
+            id,
+            data.packName,
+            data.privatePack,
+            profileUserId,
+            currentFilter,
+          ),
+        );
       } else {
-        dispatch(addPack(data.packName, data.privatePack));
+        dispatch(addPack(data.packName, data.privatePack, profileUserId, currentFilter));
       }
 
       formik.resetForm();

@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 
-import { useAppDispatch } from '../../common/hooks/hooks';
+import { useSearchParams } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { deleteCard } from '../../pages/packsList/cards/cardsReducer';
 import { deletePack } from '../../pages/packsList/packsReducer';
 import { Button } from '../button/Button';
@@ -26,9 +28,16 @@ export const DeletePackAndCard: FC<PropsType> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const profileUserId = useAppSelector(state => state.profile._id);
+
+  // to find query
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentFilter = searchParams.get('accessory');
+
+  // profileUserId and currentFilter for My/All packs correct refresh
   const deletePackHandler = () => {
     if (cardId) dispatch(deleteCard(packId, cardId));
-    else dispatch(deletePack(packId));
+    else dispatch(deletePack(packId, profileUserId, currentFilter));
 
     handleClose();
   };
