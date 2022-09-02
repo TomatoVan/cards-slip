@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/cards-slip/static/css/main.b16ae6cf.css",
-    "main.js": "/cards-slip/static/js/main.129a4ce0.js",
+    "main.css": "/cards-slip/static/css/main.e7ddb088.css",
+    "main.js": "/cards-slip/static/js/main.c7bb4647.js",
     "static/media/SFUIText-Semibold.woff": "/cards-slip/static/media/SFUIText-Semibold.df4855fdeebbfd730663.woff",
     "static/media/SFUIText-Medium.woff": "/cards-slip/static/media/SFUIText-Medium.7a83304e816b06d35492.woff",
     "static/media/SFUIText-Bold.woff": "/cards-slip/static/media/SFUIText-Bold.42a114dc81fbcbfb38c2.woff",
@@ -19,11 +19,11 @@
     "static/media/search.svg": "/cards-slip/static/media/search.f161824b0f966009030e.svg",
     "index.html": "/cards-slip/index.html",
     "static/media/eye.svg": "/cards-slip/static/media/eye.b30b1f6a2b20057708f4.svg",
-    "main.b16ae6cf.css.map": "/cards-slip/static/css/main.b16ae6cf.css.map",
-    "main.129a4ce0.js.map": "/cards-slip/static/js/main.129a4ce0.js.map"
+    "main.e7ddb088.css.map": "/cards-slip/static/css/main.e7ddb088.css.map",
+    "main.c7bb4647.js.map": "/cards-slip/static/js/main.c7bb4647.js.map"
   },
   "entrypoints": [
-    "static/css/main.b16ae6cf.css",
-    "static/js/main.129a4ce0.js"
+    "static/css/main.e7ddb088.css",
+    "static/js/main.c7bb4647.js"
   ]
 }
