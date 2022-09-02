@@ -2,23 +2,23 @@ import React from 'react';
 
 import FilterAltOffTwoToneIcon from '@mui/icons-material/FilterAltOffTwoTone';
 import IconButton from '@mui/material/IconButton';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { setResetPacksParams } from '../../pages/packsList/packsReducer';
 
-export const ClearAll = () => {
+type PropsType = {
+  accessoryQueryFilter: string | null;
+};
+
+export const ClearAll = React.memo(({ accessoryQueryFilter }: PropsType) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const status = useAppSelector(state => state.app.status);
 
-  // to find query
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get('accessory');
-
   // reset all params
   const clearFiltersHandler = () => {
-    if (currentFilter === 'My') {
+    if (accessoryQueryFilter === 'My') {
       dispatch(setResetPacksParams(''));
       navigate('/packs?accessory=All');
     } else {
@@ -37,4 +37,4 @@ export const ClearAll = () => {
       </IconButton>
     </div>
   );
-};
+});

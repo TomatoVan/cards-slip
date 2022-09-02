@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -9,17 +9,17 @@ import {
   setResetPacksParams,
 } from '../../pages/packsList/packsReducer';
 
-export const Filter = () => {
+type PropsType = {
+  accessoryQueryFilter: string | null;
+};
+
+export const Filter = React.memo(({ accessoryQueryFilter }: PropsType) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const id = useAppSelector(state => state.profile._id);
   const status = useAppSelector(state => state.app.status);
   const filter = useAppSelector(state => state.packs.params.user_id);
-
-  // to find query
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get('accessory');
 
   const [isActive, setIsActive] = useState(false);
 
@@ -39,13 +39,13 @@ export const Filter = () => {
   }, [filter]);
 
   useEffect(() => {
-    if (currentFilter === 'My') {
+    if (accessoryQueryFilter === 'My') {
       setIsActive(true);
     } else {
       setIsActive(false);
       navigate('/packs?accessory=All');
     }
-  }, [currentFilter]);
+  }, [accessoryQueryFilter]);
 
   return (
     <div className="filter">
@@ -82,4 +82,4 @@ export const Filter = () => {
       </div>
     </div>
   );
-};
+});

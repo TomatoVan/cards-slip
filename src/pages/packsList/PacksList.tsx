@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import { useAppSelector } from '../../common/hooks/hooks';
 import { Button } from '../../components/button/Button';
 import { ClearAll } from '../../components/clearAll/ClearAll';
@@ -13,6 +15,10 @@ import { Packs } from './Packs';
 
 export const PacksList = () => {
   const status = useAppSelector(state => state.app.status);
+
+  // to find query
+  const [searchParams, setSearchParams] = useSearchParams();
+  const accessoryQueryFilter = searchParams.get('accessory');
 
   // Modals
   const [open, setOpen] = useState(false);
@@ -34,11 +40,11 @@ export const PacksList = () => {
       <AddAndEditPackModal title="Add new pack" open={open} handleClose={handleClose} />
       <div className="cards__menu">
         <Search location="Packs" />
-        <Filter />
+        <Filter accessoryQueryFilter={accessoryQueryFilter} />
         <RangeSlider />
-        <ClearAll />
+        <ClearAll accessoryQueryFilter={accessoryQueryFilter} />
       </div>
-      <Packs />
+      <Packs accessoryQueryFilter={accessoryQueryFilter} />
       <Pagination location="Packs" />
     </div>
   );
