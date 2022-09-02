@@ -21,7 +21,7 @@ import { Registration } from '../pages/registration/Registration';
 
 import { initializeApp } from './appReducer';
 
-export const App = (): any => {
+export const App = () => {
   const dispatch = useAppDispatch();
   const isInitialized = useAppSelector(state => state.app.isInitialized);
   const status = useAppSelector(state => state.app.status);

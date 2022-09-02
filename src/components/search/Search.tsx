@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { useDebounce } from '../../common/hooks/useDebounce';
@@ -9,7 +9,7 @@ type PropsType = {
   location: string;
 };
 
-export const Search: FC<PropsType> = ({ location }) => {
+export const Search = React.memo(({ location }: PropsType) => {
   const dispatch = useAppDispatch();
   const disabled = useAppSelector(state => state.app.status);
   const searchValue = useAppSelector(state => state.packs.params.packName);
@@ -50,4 +50,4 @@ export const Search: FC<PropsType> = ({ location }) => {
       </label>
     </div>
   );
-};
+});

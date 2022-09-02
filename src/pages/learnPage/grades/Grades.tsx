@@ -19,7 +19,7 @@ type PropsType = {
   setGrade: (grade: number) => void;
 };
 
-export const Grades: React.FC<PropsType> = ({ setGrade }) => {
+export const Grades = React.memo(({ setGrade }: PropsType) => {
   const onChangeRadioHandle = (event: ChangeEvent<HTMLInputElement>): void => {
     setGrade(+event.target.value);
   };
@@ -39,4 +39,4 @@ export const Grades: React.FC<PropsType> = ({ setGrade }) => {
       </RadioGroup>
     </FormControl>
   );
-};
+});

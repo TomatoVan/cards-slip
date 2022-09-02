@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SchoolIcon from '@mui/icons-material/School';
@@ -15,7 +15,7 @@ import { Card } from './Card';
 import { getCards, setResetCardsParams } from './cardsReducer';
 import { EmptyPackPage } from './EmptyPackPage';
 
-export const CardsPage = memo(() => {
+export const CardsPage = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -139,7 +139,7 @@ export const CardsPage = memo(() => {
       />
     </div>
   );
-});
+};
 
 export type LocationStateType = {
   packName: string;
