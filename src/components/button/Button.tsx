@@ -6,8 +6,7 @@ type PropsType = {
   submit: boolean;
   disabled?: boolean;
 };
-export const Button = React.memo((props: PropsType) => {
-  const { callBack, title, disabled, submit } = props;
+export const Button = React.memo(({ callBack, title, disabled, submit }: PropsType) => {
   let className;
 
   if (title === 'Cancel') className = 'cancel';

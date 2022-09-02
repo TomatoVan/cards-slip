@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
@@ -23,26 +23,28 @@ type PropsType = {
   title: string;
 };
 
-export const CustomModal: FC<PropsType> = ({ children, open, handleClose, title }) => {
-  return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div className="modals">
-            <div className="modals modals__title">
-              <div className="cut">{title}</div>
-              <CloseIcon onClick={() => handleClose()} />
+export const CustomModal = React.memo(
+  ({ children, open, handleClose, title }: PropsType) => {
+    return (
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <div className="modals">
+              <div className="modals modals__title">
+                <div className="cut">{title}</div>
+                <CloseIcon onClick={() => handleClose()} />
+              </div>
+              <hr className="modals modals__hr" />
+              {children}
             </div>
-            <hr className="modals modals__hr" />
-            {children}
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
-};
+          </Box>
+        </Modal>
+      </div>
+    );
+  },
+);

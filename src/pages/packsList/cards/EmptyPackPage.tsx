@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../common/hooks/hooks';
 import { Button } from '../../../components/button/Button';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 
-export const EmptyPackPage: React.FC<EmptyPackPageType> = ({ packName, id }) => {
+export const EmptyPackPage = React.memo(({ packName, id }: EmptyPackPageType) => {
   const status = useAppSelector(state => state.app.status);
 
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const EmptyPackPage: React.FC<EmptyPackPageType> = ({ packName, id }) => 
       </div>
     </div>
   );
-};
+});
 
 type EmptyPackPageType = {
   packName?: string;

@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-import { useAppDispatch } from '../../common/hooks/hooks';
+import { useSearchParams } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { deleteCard } from '../../pages/packsList/cards/cardsReducer';
 import { deletePack } from '../../pages/packsList/packsReducer';
 import { Button } from '../button/Button';
@@ -16,34 +18,37 @@ type PropsType = {
   cardId?: string;
 };
 
-export const DeletePackAndCard: FC<PropsType> = ({
-  open,
-  handleClose,
-  title,
-  cardId,
-  name,
-  packId,
-}) => {
-  const dispatch = useAppDispatch();
+export const DeletePackAndCard = React.memo(
+  ({ open, handleClose, title, cardId, name, packId }: PropsType) => {
+    const dispatch = useAppDispatch();
 
-  const deletePackHandler = () => {
-    if (cardId) dispatch(deleteCard(packId, cardId));
-    else dispatch(deletePack(packId));
+    const profileUserId = useAppSelector(state => state.profile._id);
+    const cardsPageCount = useAppSelector(state => state.cards.params.pageCount);
 
-    handleClose();
-  };
+    // to find query
+    const [searchParams, setSearchParams] = useSearchParams();
+    const accessoryQueryFilter = searchParams.get('accessory');
 
-  return (
-    <CustomModal title={title} handleClose={handleClose} open={open}>
-      <div className="modals modals__deleteMessage">
-        <p className="cut">
-          Do you really want to remove <b>{name}</b>? All cards will be deleted.
-        </p>
-        <div className="submit submit__modals">
-          <Button title="Cancel" callBack={handleClose} submit={false} />
-          <Button title="Delete" callBack={deletePackHandler} submit={false} />
+    // profileUserId and currentFilter for My/All packs correct refresh
+    const deletePackHandler = () => {
+      if (cardId) dispatch(deleteCard(packId, cardId, cardsPageCount));
+      else dispatch(deletePack(packId, profileUserId, accessoryQueryFilter));
+
+      handleClose();
+    };
+
+    return (
+      <CustomModal title={title} handleClose={handleClose} open={open}>
+        <div className="modals modals__deleteMessage">
+          <p className="cut">
+            Do you really want to remove <b>{name}</b>? All cards will be deleted.
+          </p>
+          <div className="submit submit__modals">
+            <Button title="Cancel" callBack={handleClose} submit={false} />
+            <Button title="Delete" callBack={deletePackHandler} submit={false} />
+          </div>
         </div>
-      </div>
-    </CustomModal>
-  );
-};
+      </CustomModal>
+    );
+  },
+);

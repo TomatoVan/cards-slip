@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Stack from '@mui/material/Stack';
 import TablePagination from '@mui/material/TablePagination';
@@ -11,7 +11,7 @@ type PropsType = {
   location: string;
 };
 
-export const Pagination: FC<PropsType> = ({ location }) => {
+export const Pagination = React.memo(({ location }: PropsType) => {
   const dispatch = useAppDispatch();
 
   const initRowsPerPage = 10;
@@ -50,7 +50,6 @@ export const Pagination: FC<PropsType> = ({ location }) => {
 
     setRowsPerPage(newValue);
     setPage(1);
-    dispatch(setPagination(page, newValue));
     if (currentPlaceIsPacks) dispatch(setPagination(page, newValue));
     else dispatch(setCardsPagination(page, newValue));
   };
@@ -80,4 +79,4 @@ export const Pagination: FC<PropsType> = ({ location }) => {
       </div>
     </div>
   );
-};
+});

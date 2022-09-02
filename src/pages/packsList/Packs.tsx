@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
-import { useSearchParams } from 'react-router-dom';
 
 import { sortingMethods } from '../../api/PackApi';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
@@ -10,7 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { Pack } from './Pack';
 import { getPacks, setResetPacksParams, setSortPacks } from './packsReducer';
 
-export const Packs = () => {
+type PropsType = {
+  accessoryQueryFilter: string | null;
+};
+
+export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsType) => {
   const dispatch = useAppDispatch();
 
   const packs = useAppSelector(state => state.packs.cardPacks);
@@ -26,10 +29,6 @@ export const Packs = () => {
   const packName = useAppSelector(state => state.packs.params.packName);
   const status = useAppSelector(state => state.app.status);
 
-  // to find query
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get('accessory');
-
   // For empty elements
   const emptySearchResults = packs.length === 0 && packName !== '';
   const emptySliderResults =
@@ -44,9 +43,19 @@ export const Packs = () => {
 
   // Get and update packs
   useEffect(() => {
-    if (currentFilter === 'My') dispatch(getPacks({ user_id: profileUserId }));
+    if (accessoryQueryFilter === 'My') dispatch(getPacks({ user_id: profileUserId }));
     else dispatch(getPacks({}));
-  }, [dispatch, page, pageCount, sortPacks, min, max, packName, userId, currentFilter]);
+  }, [
+    dispatch,
+    page,
+    pageCount,
+    sortPacks,
+    min,
+    max,
+    packName,
+    userId,
+    accessoryQueryFilter,
+  ]);
 
   const sortPacksByLastUpdate = () => {
     if (status === 'idle') {
@@ -124,4 +133,4 @@ export const Packs = () => {
       )}
     </div>
   );
-};
+});

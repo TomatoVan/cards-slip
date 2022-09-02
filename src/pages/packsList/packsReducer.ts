@@ -143,14 +143,20 @@ export const getPacks =
   };
 
 export const addPack =
-  (packName: string, packPrivate: boolean): AppThunkType =>
+  (
+    packName: string,
+    packPrivate: boolean,
+    profileUserId: string,
+    currentFilter: string | null,
+  ): AppThunkType =>
   async dispatch => {
     const cardsPack = { name: packName, private: packPrivate };
 
     dispatch(changeAppStatus('loading'));
     try {
       await packApi.addPack(cardsPack);
-      dispatch(getPacks({}));
+      if (currentFilter === 'My') dispatch(getPacks({ user_id: profileUserId }));
+      else dispatch(getPacks({}));
       dispatch(setSuccess('New pack successfully added'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
@@ -160,12 +166,15 @@ export const addPack =
   };
 
 export const deletePack =
-  (packId: string): AppThunkType =>
+  (packId: string, profileUserId: string, currentFilter: string | null): AppThunkType =>
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
       await packApi.deletePack({ id: packId });
-      dispatch(getPacks({}));
+
+      if (currentFilter === 'My') dispatch(getPacks({ user_id: profileUserId }));
+      else dispatch(getPacks({}));
+
       dispatch(setSuccess('Pack successfully deleted'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
@@ -175,14 +184,23 @@ export const deletePack =
   };
 
 export const changePackName =
-  (packId: string, name: string, packPrivate: boolean): AppThunkType =>
+  (
+    packId: string,
+    name: string,
+    packPrivate: boolean,
+    profileUserId: string,
+    currentFilter: string | null,
+  ): AppThunkType =>
   async dispatch => {
     const cardsPack = { _id: packId, name, private: packPrivate };
 
     dispatch(changeAppStatus('loading'));
     try {
       await packApi.updatePack(cardsPack);
-      dispatch(getPacks({}));
+
+      if (currentFilter === 'My') dispatch(getPacks({ user_id: profileUserId }));
+      else dispatch(getPacks({}));
+
       dispatch(setSuccess('Pack successfully changed'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
