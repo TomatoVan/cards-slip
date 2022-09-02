@@ -23,6 +23,7 @@ export const DeletePackAndCard = React.memo(
     const dispatch = useAppDispatch();
 
     const profileUserId = useAppSelector(state => state.profile._id);
+    const cardsPageCount = useAppSelector(state => state.cards.params.pageCount);
 
     // to find query
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +31,7 @@ export const DeletePackAndCard = React.memo(
 
     // profileUserId and currentFilter for My/All packs correct refresh
     const deletePackHandler = () => {
-      if (cardId) dispatch(deleteCard(packId, cardId));
+      if (cardId) dispatch(deleteCard(packId, cardId, cardsPageCount));
       else dispatch(deletePack(packId, profileUserId, accessoryQueryFilter));
 
       handleClose();

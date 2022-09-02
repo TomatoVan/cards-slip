@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useFormik } from 'formik';
 
-import { useAppDispatch } from '../../common/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { addCard, changeCardName } from '../../pages/packsList/cards/cardsReducer';
 import { Button } from '../button/Button';
 import { Input } from '../input/Input';
@@ -26,6 +26,8 @@ type PropsType = {
 export const AddAndEditCardModal = React.memo(
   ({ open, handleClose, title, packId, cardId, question, answer }: PropsType) => {
     const dispatch = useAppDispatch();
+
+    const cardsPageCount = useAppSelector(state => state.cards.params.pageCount);
 
     // for edit
     let name = '';
@@ -66,8 +68,11 @@ export const AddAndEditCardModal = React.memo(
           answer: values.answer,
         };
 
-        if (cardId) dispatch(changeCardName(packId, cardId, data.question, data.answer));
-        else dispatch(addCard(packId, data.question, data.answer));
+        if (cardId)
+          dispatch(
+            changeCardName(packId, cardId, data.question, data.answer, cardsPageCount),
+          );
+        else dispatch(addCard(packId, data.question, data.answer, cardsPageCount));
 
         formik.resetForm();
         handleClose();

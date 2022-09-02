@@ -120,7 +120,7 @@ export const getCards =
   };
 
 export const addCard =
-  (packId: string, question: string, answer: string): AppThunkType =>
+  (packId: string, question: string, answer: string, pageCount?: number): AppThunkType =>
   async dispatch => {
     const card = {
       cardsPack_id: packId,
@@ -131,7 +131,7 @@ export const addCard =
     dispatch(changeAppStatus('loading'));
     try {
       await cardsApi.postCard(card);
-      dispatch(getCards(packId));
+      dispatch(getCards(packId, pageCount));
       dispatch(setSuccess('New card successfully added'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
@@ -141,12 +141,12 @@ export const addCard =
   };
 
 export const deleteCard =
-  (packId: string, cardId: string): AppThunkType =>
+  (packId: string, cardId: string, pageCount?: number): AppThunkType =>
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
       await cardsApi.deleteCard({ id: cardId });
-      dispatch(getCards(packId));
+      dispatch(getCards(packId, pageCount));
       dispatch(setSuccess('Card successfully deleted'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
@@ -156,14 +156,20 @@ export const deleteCard =
   };
 
 export const changeCardName =
-  (packId: string, cardId: string, question: string, answer: string): AppThunkType =>
+  (
+    packId: string,
+    cardId: string,
+    question: string,
+    answer: string,
+    pageCount?: number,
+  ): AppThunkType =>
   async dispatch => {
     const card = { _id: cardId, question, answer };
 
     dispatch(changeAppStatus('loading'));
     try {
       await cardsApi.updateCard(card);
-      dispatch(getCards(packId));
+      dispatch(getCards(packId, pageCount));
       dispatch(setSuccess('Card successfully changed'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
