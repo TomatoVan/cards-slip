@@ -1,5 +1,5 @@
 import { profileAPI } from '../../api/ProfileApi';
-import { setError } from '../../app/appReducer';
+import { changeAppStatus, setError } from '../../app/appReducer';
 import { AppThunkType } from '../../common/types/types';
 
 const initialState: ProfileStateType = {
@@ -45,23 +45,44 @@ export const setUserData = (
   } as const;
 };
 
-export const updateUserData = (name: string): any => {
+export const updateUserData = (name: string, avatar: string): any => {
   return {
     type: 'PROFILE/UPDATE_USER_DATA',
-    payload: { name },
+    payload: { name, avatar },
   } as const;
 };
 
-export const updateUserInfo =
+export const updateUserName =
   (name: string): AppThunkType =>
-  async dispatch => {
+  async (dispatch, getState) => {
+    dispatch(changeAppStatus('loading'));
     try {
-      const response = await profileAPI.updateData({ name });
+      const { avatar } = getState().profile;
+      const response = await profileAPI.updateData({ name, avatar });
       const updatedName = response.data.updatedUser.name;
 
-      dispatch(updateUserData(updatedName));
+      dispatch(updateUserData(updatedName, avatar));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
+    } finally {
+      dispatch(changeAppStatus('idle'));
+    }
+  };
+
+export const updateUserAvatar =
+  (avatar: string): AppThunkType =>
+  async (dispatch, getState) => {
+    dispatch(changeAppStatus('loading'));
+    try {
+      const { name } = getState().profile;
+      const response = await profileAPI.updateData({ name, avatar });
+      const updatedAvatar = response.data.updatedUser.avatar;
+
+      dispatch(updateUserData(name, updatedAvatar));
+    } catch (err: any) {
+      dispatch(setError(err.response.data.error));
+    } finally {
+      dispatch(changeAppStatus('idle'));
     }
   };
 

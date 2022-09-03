@@ -26,9 +26,13 @@ export const Header = React.memo(
               </div>
               <div className="user-data__avatar" onClick={navigateHandler}>
                 {avatar ? (
-                  <img src={avatar} alt="avatar" />
+                  <img src={avatar} alt="avatar" className="user-data__avatarImg" />
                 ) : (
-                  <img src={defaultAvatar} alt="avatar" />
+                  <img
+                    src={defaultAvatar}
+                    alt="avatar"
+                    className="user-data__avatarImg"
+                  />
                 )}
               </div>
             </div>

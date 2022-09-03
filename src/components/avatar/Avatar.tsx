@@ -4,12 +4,17 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import IconButton from '@mui/material/IconButton';
 
 import defaultAvatar from '../../assets/img/avatar.png';
+import { useAppDispatch } from '../../common/hooks/hooks';
+import { convertFileToBase64 } from '../../common/utils/Base64Converter';
+import { updateUserAvatar } from '../../pages/profile/profileReducer';
 
 type PropsType = {
   avatar: string | null;
 };
 
 export const Avatar = React.memo(({ avatar }: PropsType) => {
+  const dispatch = useAppDispatch();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const selectFileHandler = () => {
@@ -22,7 +27,9 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0];
 
-      console.log('file: ', file);
+      convertFileToBase64(file, (file64: string) => {
+        dispatch(updateUserAvatar(file64));
+      });
     }
   };
 

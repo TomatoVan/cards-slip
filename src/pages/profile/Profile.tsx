@@ -8,7 +8,7 @@ import { Button } from '../../components/button/Button';
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { logoutTC } from '../login/loginReducer';
 
-import { updateUserInfo } from './profileReducer';
+import { updateUserName } from './profileReducer';
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const Profile = () => {
   const status = useAppSelector(state => state.app.status);
 
   const logout = () => dispatch(logoutTC());
-  const updateUserInfoHandler = (newTitle: string) => dispatch(updateUserInfo(newTitle));
+  const updateUserInfoHandler = (newTitle: string) => dispatch(updateUserName(newTitle));
 
   useEffect(() => {
     if (!isLoggedIn) {

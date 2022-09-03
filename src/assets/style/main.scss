@@ -397,13 +397,16 @@
     color: #366EFF;
   }
   &__avatar {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     transition: ease-in-out 0.2s;
   }
   &__avatar:hover {
     transform: scale(1.08);
+  }
+  &__avatarImg {
+    border-radius: 100%;
   }
 }
 
