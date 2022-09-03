@@ -236,6 +236,19 @@
 
 }
 
+.avatar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  &__icon {
+    position: absolute;
+    bottom: 10px;
+    right: 120px;
+  }
+
+}
+
 .header {
   position: relative;
   z-index: 3;
@@ -354,13 +367,15 @@
 
 .profile {
   &__avatar img {
-    text-align: center;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     margin: 30px auto;
     border-radius: 50%;
   }
-
+  &__name {
+    font-size: 20px;
+    line-height: 24px;
+  }
   &__email, &__button, &__cards-count, &__name {
     margin-top: 30px;
     text-align: center;
@@ -375,11 +390,20 @@
   &__name {
     font-weight: 600;
     margin-right: 10px;
+    border-bottom: 1px dashed #000000;
+    cursor: pointer;
   }
-
+  &__name:hover {
+    color: #366EFF;
+  }
   &__avatar {
     width: 36px;
     height: 36px;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+  }
+  &__avatar:hover {
+    transform: scale(1.08);
   }
 }
 

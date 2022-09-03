@@ -1,42 +1,68 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
 
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
+
+import { useAppSelector } from '../../common/hooks/hooks';
 
 export type EditableSpanPropsType = {
   name: string;
-  callback: (newTitle: string) => void;
+  updateUserInfoHandler: (newTitle: string) => void;
 };
 
-export const EditableSpan = React.memo(({ name, callback }: EditableSpanPropsType) => {
-  const [field, setField] = useState<'span' | 'input'>('span');
-  const [value, setValue] = useState(name);
+export const EditableSpan = React.memo(
+  ({ name, updateUserInfoHandler }: EditableSpanPropsType) => {
+    const status = useAppSelector(state => state.app.status);
 
-  const onDoubleClickHandler = (): void => {
-    setField('input');
-  };
+    const [field, setField] = useState<'span' | 'input'>('span');
+    const [value, setValue] = useState(name);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    setValue(event.currentTarget.value);
-  };
+    const setEditModeHandler = (): void => {
+      setField('input');
+    };
 
-  const onBlurHandler = (): void => {
-    callback(value);
-    setField('span');
-  };
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+      setValue(event.currentTarget.value);
+    };
 
-  return (
-    <div>
-      {field === 'input' ? (
-        <TextField
-          variant="standard"
-          onChange={onChangeHandler}
-          onBlur={onBlurHandler}
-          value={value}
-          autoFocus
-        />
-      ) : (
-        <span onDoubleClick={onDoubleClickHandler}>{name}</span>
-      )}
-    </div>
-  );
-});
+    const onBlurHandler = () => {
+      updateUserInfoHandler(value);
+      setField('span');
+    };
+
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Enter') {
+        updateUserInfoHandler(value);
+        setField('span');
+      }
+    };
+
+    return (
+      <div>
+        {field === 'input' ? (
+          <TextField
+            variant="standard"
+            onChange={onChangeHandler}
+            onBlur={onBlurHandler}
+            onKeyDown={e => onKeyDownHandler(e)}
+            value={value}
+            autoFocus
+          />
+        ) : (
+          <div>
+            <span>{name}</span>
+            <IconButton
+              onClick={setEditModeHandler}
+              aria-label="edit"
+              size="small"
+              disabled={status === 'loading'}
+            >
+              <BorderColorRoundedIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+        )}
+      </div>
+    );
+  },
+);

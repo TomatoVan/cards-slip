@@ -16,7 +16,7 @@ import { EmptyPackPage } from '../pages/packsList/cards/EmptyPackPage';
 import { PacksList } from '../pages/packsList/PacksList';
 import { PasswordNew } from '../pages/password-new/PasswordNew';
 import { PasswordRecovery } from '../pages/password-recovery/PasswordRecovery';
-import { ProfileContainer } from '../pages/profile/ProfileContainer';
+import { Profile } from '../pages/profile/Profile';
 import { Registration } from '../pages/registration/Registration';
 
 import { initializeApp } from './appReducer';
@@ -82,7 +82,7 @@ export const App = () => {
             <Route path="password-recovery" element={<PasswordRecovery />} />
             <Route path="packs" element={<PacksList />} />
             <Route path="registration" element={<Registration />} />
-            <Route path="profile" element={<ProfileContainer />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="404" element={<NotFound />} />
             <Route path="cardsPage" element={<CardsPage />} />
             <Route path="emptyPackPage" element={<EmptyPackPage />} />
