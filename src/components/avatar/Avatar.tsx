@@ -3,6 +3,7 @@ import React, { ChangeEvent, useRef } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import IconButton from '@mui/material/IconButton';
 
+import { setError } from '../../app/appReducer';
 import defaultAvatar from '../../assets/img/avatar.png';
 import { useAppDispatch } from '../../common/hooks/hooks';
 import { convertFileToBase64 } from '../../common/utils/Base64Converter';
@@ -33,13 +34,17 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
     }
   };
 
+  const errorHandler = () => {
+    dispatch(setError('Avatar picture broken'));
+  };
+
   return (
     <div className="avatar">
       <div>
         {avatar ? (
-          <img src={avatar} alt="avatar" />
+          <img src={avatar} alt="avatar" onError={errorHandler} />
         ) : (
-          <img src={defaultAvatar} alt="avatar" />
+          <img src={defaultAvatar} alt="avatar" onError={errorHandler} />
         )}
       </div>
       <div className="avatar__icon">
@@ -49,7 +54,7 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
             type="file"
             onChange={uploadHandler}
             ref={inputRef}
-            style={{ display: 'none' }}
+            className="avatar__inputHide"
           />
           <IconButton onClick={selectFileHandler}>
             <CloudUploadIcon />
