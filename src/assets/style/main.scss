@@ -316,6 +316,35 @@
   }
 }
 
+.notFound {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  justify-content: center;
+  align-items: center;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__elems {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 100px;
+  }
+  &__title {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 50px;
+  }
+  &__descr {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+}
+
 .login {
   &__forgotLink {
     margin-left: 65%;
