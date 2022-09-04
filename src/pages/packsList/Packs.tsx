@@ -125,6 +125,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
                   author={el.user_name}
                   cards={el.cardsCount}
                   lastUploaded={el.updated}
+                  deckCover={el.deckCover}
                 />
               );
             })}

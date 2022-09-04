@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 
+import noCover from '../../assets/img/noCover.png';
 import { useAppSelector } from '../../common/hooks/hooks';
 import { AddAndEditPackModal } from '../../components/modals/AddAndEditPackModal';
 import { DeletePackAndCard } from '../../components/modals/DeletePackAndCard';
@@ -18,16 +19,18 @@ type PropsType = {
   lastUploaded: string;
   id: string;
   authorId: string;
+  deckCover: string | null;
 };
 
 export const Pack = memo(
-  ({ id, name, cards, authorId, author, lastUploaded }: PropsType) => {
+  ({ id, name, cards, authorId, author, lastUploaded, deckCover }: PropsType) => {
     const updatedDate = new Date(lastUploaded).toLocaleDateString('ru');
 
     const navigate = useNavigate();
 
     const userId = useAppSelector(state => state.profile._id);
     const status = useAppSelector(state => state.app.status);
+    const [isDeckCoverBroken, setIsDeckCoverBroke] = useState(false);
 
     // Modals
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -60,10 +63,24 @@ export const Pack = memo(
       });
     };
 
+    const deckCoverErrorHandler = () => {
+      setIsDeckCoverBroke(true);
+    };
+
     return (
       <div className="pack">
-        <div onClick={getCardsHandler} className="pack__col cut">
-          {name}
+        <div className="pack__col pack__title">
+          {deckCover ? (
+            <img
+              src={isDeckCoverBroken ? noCover : deckCover}
+              alt="deckCover"
+              className="pack__cover"
+              onError={deckCoverErrorHandler}
+            />
+          ) : null}
+          <div onClick={getCardsHandler} className="pack__name cut">
+            {name}
+          </div>
         </div>
         <div className="pack__col">{cards}</div>
         <div className="pack__col">{updatedDate}</div>

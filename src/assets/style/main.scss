@@ -566,7 +566,6 @@
       cursor: pointer;
     }
   }
-
 }
 
 .pack {
@@ -589,7 +588,19 @@
   &:last-child {
     border: none;
   }
-
+  &__title {
+    width: 250px;
+    display: flex;
+    align-items: center;
+  }
+  &__cover {
+    width: 57px;
+    height: 36px;
+    border-radius: 2px;
+    margin-right: 10px;
+  }
+  &__name {
+  }
 }
 
 .filter {

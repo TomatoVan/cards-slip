@@ -57,7 +57,7 @@ export type PackType = {
   rating: number;
   type: string;
   updated: string;
-  deckCover: null;
+  deckCover: string | null;
 };
 
 export type CardsResponseType = {
