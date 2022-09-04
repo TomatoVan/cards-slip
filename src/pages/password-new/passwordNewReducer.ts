@@ -1,5 +1,5 @@
 import { authAPI } from '../../api/AuthApi';
-import { changeAppStatus, setError } from '../../app/appReducer';
+import { changeAppStatus, setError, setSuccess } from '../../app/appReducer';
 import { AppThunkType } from '../../common/types/types';
 
 const initState = {
@@ -33,6 +33,7 @@ export const sendResetPassword =
     try {
       await authAPI.requestNewPassword(password, token);
       dispatch(setPasswordChanged(true));
+      dispatch(setSuccess('Password successfully changed'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

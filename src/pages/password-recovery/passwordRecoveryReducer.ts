@@ -33,7 +33,6 @@ export const sendPasswordRecoveryData =
     try {
       await authAPI.requestRecoveryLink(email);
       dispatch(setEmailSent(true));
-      dispatch(setSuccess('Password successfully changed'));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {
