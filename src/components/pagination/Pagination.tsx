@@ -14,6 +14,10 @@ type PropsType = {
 export const Pagination = React.memo(({ location }: PropsType) => {
   const dispatch = useAppDispatch();
 
+  // to disable pagination
+  const status = useAppSelector(state => state.app.status);
+  const isDisabled = status === 'loading';
+
   const initRowsPerPage = 10;
 
   const [rowsPerPage, setRowsPerPage] = useState(initRowsPerPage);
@@ -63,6 +67,23 @@ export const Pagination = React.memo(({ location }: PropsType) => {
               <tr>
                 {!!totalCountPacks && (
                   <TablePagination
+                    SelectProps={{
+                      disabled: status === 'loading',
+                    }}
+                    backIconButtonProps={
+                      isDisabled
+                        ? {
+                            disabled: isDisabled,
+                          }
+                        : undefined
+                    }
+                    nextIconButtonProps={
+                      isDisabled
+                        ? {
+                            disabled: isDisabled,
+                          }
+                        : undefined
+                    }
                     count={currenTotalCount}
                     showFirstButton
                     showLastButton
