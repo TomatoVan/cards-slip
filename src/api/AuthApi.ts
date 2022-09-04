@@ -17,7 +17,7 @@ export const authAPI = {
         email,
         from: 'PacksList slip 🤹🏼 <admin@gmail.com>',
         message: `<div style="background-color: lime; padding: 15px">
-                            password recovery link:<a href='https://TomatoVan.github.io/cards/#/set-new-password/$token$'> link</a>
+                            password recovery link:<a href='https://tomatovan.github.io/cards-slip/#/set-new-password/$token$'> link</a>
                           </div>`,
       },
     );
