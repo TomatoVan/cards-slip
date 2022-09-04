@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { Avatar } from '../../components/avatar/Avatar';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { logoutTC } from '../login/loginReducer';
 
@@ -50,7 +50,7 @@ export const Profile = () => {
           <h4>Cards created: {cardsCount}</h4>
         </div>
         <div className="profile__button">
-          <Button
+          <CustomButton
             title="logout"
             submit={false}
             disabled={status === 'loading'}

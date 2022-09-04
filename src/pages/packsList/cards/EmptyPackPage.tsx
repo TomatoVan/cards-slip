@@ -4,7 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../../common/hooks/hooks';
-import { Button } from '../../../components/button/Button';
+import { CustomButton } from '../../../components/button/CustomButton';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 
 export const EmptyPackPage = React.memo(({ packName, id }: EmptyPackPageType) => {
@@ -37,7 +37,7 @@ export const EmptyPackPage = React.memo(({ packName, id }: EmptyPackPageType) =>
         <div className="empty-pack__text">
           This pack is empty. Click add new pack to fill this pack
         </div>
-        <Button
+        <CustomButton
           title="Add new cards"
           callBack={handleOpen}
           submit={false}

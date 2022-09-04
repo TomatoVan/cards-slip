@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks';
-import { Button } from '../../../components/button/Button';
+import { CustomButton } from '../../../components/button/CustomButton';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 import { Pagination } from '../../../components/pagination/Pagination';
 import { Search } from '../../../components/search/Search';
@@ -92,7 +92,7 @@ export const CardsPage = () => {
       </div>
       <div className="cards__menu">
         <Search location="Cards" />
-        <Button
+        <CustomButton
           title="Add new card"
           submit={false}
           callBack={handleOpen}

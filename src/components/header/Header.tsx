@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import defaultAvatar from '../../assets/img/avatar.png';
 import logo from '../../assets/img/logo.svg';
-import { Button } from '../button/Button';
+import { CustomButton } from '../button/CustomButton';
 
 export const Header = React.memo(
   ({ isAuth, userName, avatar, navToSignIn }: HeaderPropsType) => {
@@ -37,7 +37,7 @@ export const Header = React.memo(
               </div>
             </div>
           ) : (
-            <Button submit={false} callBack={navToSignIn} title="Sign in" />
+            <CustomButton submit={false} callBack={navToSignIn} title="Sign in" />
           )}
         </div>
       </header>

@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { Input } from '../../components/input/Input';
 
 import { sendLoginData } from './loginReducer';
@@ -92,7 +92,7 @@ export const Login = () => {
           Forgot Password
         </NavLink>
         <div className="submit">
-          <Button title="Sign in" disabled={status === 'loading'} submit />
+          <CustomButton title="Sign in" disabled={status === 'loading'} submit />
         </div>
       </form>
       <div className="login__text">Don’t have an account?</div>

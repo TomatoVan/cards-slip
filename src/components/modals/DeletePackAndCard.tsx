@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { deleteCard } from '../../pages/packsList/cards/cardsReducer';
 import { deletePack } from '../../pages/packsList/packsReducer';
-import { Button } from '../button/Button';
+import { CustomButton } from '../button/CustomButton';
 
 import { CustomModal } from './CustomModal';
 
@@ -39,13 +39,13 @@ export const DeletePackAndCard = React.memo(
 
     return (
       <CustomModal title={title} handleClose={handleClose} open={open}>
-        <div className="modals modals__deleteMessage">
+        <div className="modals__deleteMessage">
           <p className="cut">
             Do you really want to remove <b>{name}</b>? All cards will be deleted.
           </p>
           <div className="submit submit__modals">
-            <Button title="Cancel" callBack={handleClose} submit={false} />
-            <Button title="Delete" callBack={deletePackHandler} submit={false} />
+            <CustomButton title="Cancel" callBack={handleClose} submit={false} />
+            <CustomButton title="Delete" callBack={deletePackHandler} submit={false} />
           </div>
         </div>
       </CustomModal>

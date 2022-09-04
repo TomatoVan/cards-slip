@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { CardType } from '../../api/CardsApi';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { LocationStateType } from '../packsList/cards/CardsPage';
 import { getCards, putCardGrade } from '../packsList/cards/cardsReducer';
 
@@ -112,7 +112,11 @@ export const LearnPage = () => {
           </div>
         </div>
         <div className="learn__btn">
-          <Button callBack={handleSetShowAnswer} title="Show answer" submit={false} />
+          <CustomButton
+            callBack={handleSetShowAnswer}
+            title="Show answer"
+            submit={false}
+          />
         </div>
         {showAnswer && (
           <div className="learn__answer">
@@ -123,7 +127,11 @@ export const LearnPage = () => {
             <div className={`learn__${error}`}>You should chose one</div>
             <Grades setGrade={setGrade} />
             <div className="learn__btn">
-              <Button title="Next question" submit={false} callBack={nextQuestion} />
+              <CustomButton
+                title="Next question"
+                submit={false}
+                callBack={nextQuestion}
+              />
             </div>
           </div>
         )}

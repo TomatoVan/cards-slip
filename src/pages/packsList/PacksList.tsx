@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { ClearAll } from '../../components/clearAll/ClearAll';
 import { Filter } from '../../components/filter/Filter';
 import { AddAndEditPackModal } from '../../components/modals/AddAndEditPackModal';
@@ -30,14 +30,21 @@ export const PacksList = () => {
     <div className="cards">
       <div className="cards__top">
         <div className="cards__title">Packs list</div>
-        <Button
+        <CustomButton
           title="Add new pack"
           callBack={handleOpen}
           submit={false}
           disabled={status === 'loading'}
         />
       </div>
-      <AddAndEditPackModal title="Add new pack" open={open} handleClose={handleClose} />
+      <AddAndEditPackModal
+        title="Add new pack"
+        open={open}
+        handleClose={handleClose}
+        name=""
+        deckCover=""
+        packWork="add"
+      />
       <div className="cards__menu">
         <Search location="Packs" />
         <Filter accessoryQueryFilter={accessoryQueryFilter} />

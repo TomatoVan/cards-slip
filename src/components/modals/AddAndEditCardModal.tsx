@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { addCard, changeCardName } from '../../pages/packsList/cards/cardsReducer';
-import { Button } from '../button/Button';
+import { CustomButton } from '../button/CustomButton';
 import { Input } from '../input/Input';
 
 import { CustomModal } from './CustomModal';
@@ -95,8 +95,8 @@ export const AddAndEditCardModal = React.memo(
             errorText={formik.errors.answer}
           />
           <div className="submit submit__modals">
-            <Button title="Cancel" callBack={handleClose} submit={false} />
-            <Button title="Save" submit />
+            <CustomButton title="Cancel" callBack={handleClose} submit={false} />
+            <CustomButton title="Save" submit />
           </div>
         </form>
       </CustomModal>

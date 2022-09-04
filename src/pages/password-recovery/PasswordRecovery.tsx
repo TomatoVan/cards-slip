@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { Input } from '../../components/input/Input';
 
 import { sendPasswordRecoveryData } from './passwordRecoveryReducer';
@@ -61,7 +61,11 @@ export const PasswordRecovery = () => {
             Enter your email address and we will send you further instructions
           </div>
           <div style={{ marginTop: '36px', display: 'flex', justifyContent: 'center' }}>
-            <Button title="Send instructions" disabled={status === 'loading'} submit />
+            <CustomButton
+              title="Send instructions"
+              disabled={status === 'loading'}
+              submit
+            />
           </div>
         </form>
       )}

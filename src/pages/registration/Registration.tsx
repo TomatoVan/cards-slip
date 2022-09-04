@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { Input } from '../../components/input/Input';
 
 import { sendRegistrationData } from './registrationReducer';
@@ -90,7 +90,7 @@ export const Registration = () => {
             errorText={formik.errors.confirm_password}
           />
           <div className="submit">
-            <Button title="Sign Up" disabled={status === 'loading'} submit />
+            <CustomButton title="Sign Up" disabled={status === 'loading'} submit />
           </div>
         </form>
       )}

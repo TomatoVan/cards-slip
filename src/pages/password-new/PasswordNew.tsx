@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { Button } from '../../components/button/Button';
+import { CustomButton } from '../../components/button/CustomButton';
 import { Input } from '../../components/input/Input';
 
 import { sendResetPassword } from './passwordNewReducer';
@@ -64,7 +64,11 @@ export const PasswordNew = () => {
           Create new password and we will send you further instructions to email
         </div>
         <div className="submit">
-          <Button title="Create new password" disabled={status === 'loading'} submit />
+          <CustomButton
+            title="Create new password"
+            disabled={status === 'loading'}
+            submit
+          />
         </div>
       </form>
     </div>
