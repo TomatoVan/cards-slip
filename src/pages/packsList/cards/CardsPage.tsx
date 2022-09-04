@@ -27,9 +27,11 @@ export const CardsPage = () => {
   const pageCount = useAppSelector(state => state.cards.params.pageCount);
   const sortCards = useAppSelector(state => state.cards.params.sortCards);
   const status = useAppSelector(state => state.app.status);
+  const userId = useAppSelector(state => state.profile._id);
 
   const { packName } = location.state as LocationStateType;
   const { id } = location.state as LocationStateType;
+  const { authorId } = location.state as LocationStateType;
 
   // For empty elements
   const emptySearchResults = cards.length === 0 && cardQuestion !== '';
@@ -68,7 +70,7 @@ export const CardsPage = () => {
   };
 
   if (cards.length === 0 && cardQuestion === '') {
-    return <EmptyPackPage packName={packName} id={id} />;
+    return <EmptyPackPage packName={packName} id={id} authorId={authorId} />;
   }
 
   return (
@@ -92,12 +94,14 @@ export const CardsPage = () => {
       </div>
       <div className="cards__menu">
         <Search location="Cards" />
-        <CustomButton
-          title="Add new card"
-          submit={false}
-          callBack={handleOpen}
-          disabled={status === 'loading'}
-        />
+        {userId === authorId && (
+          <CustomButton
+            title="Add new card"
+            submit={false}
+            callBack={handleOpen}
+            disabled={status === 'loading'}
+          />
+        )}
       </div>
       {emptySearchResults ? (
         <div className="empty">
@@ -146,4 +150,5 @@ export const CardsPage = () => {
 export type LocationStateType = {
   packName: string;
   id: string;
+  authorId: string;
 };

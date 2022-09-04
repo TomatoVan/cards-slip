@@ -50,6 +50,7 @@ export const Pack = memo(
           state: {
             packName: name,
             id,
+            authorId,
           },
         });
       }
