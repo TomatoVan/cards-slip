@@ -120,12 +120,19 @@ export const getCards =
   };
 
 export const addCard =
-  (packId: string, question: string, answer: string, pageCount?: number): AppThunkType =>
+  (
+    packId: string,
+    question: string,
+    answer: string,
+    questionImg: string,
+    pageCount?: number,
+  ): AppThunkType =>
   async dispatch => {
     const card = {
       cardsPack_id: packId,
       question,
       answer,
+      questionImg,
     };
 
     dispatch(changeAppStatus('loading'));
@@ -155,16 +162,17 @@ export const deleteCard =
     }
   };
 
-export const changeCardName =
+export const changeCard =
   (
     packId: string,
     cardId: string,
     question: string,
     answer: string,
+    questionImg: string,
     pageCount?: number,
   ): AppThunkType =>
   async dispatch => {
-    const card = { _id: cardId, question, answer };
+    const card = { _id: cardId, question, answer, questionImg };
 
     dispatch(changeAppStatus('loading'));
     try {

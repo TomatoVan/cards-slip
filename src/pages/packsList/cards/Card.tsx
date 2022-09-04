@@ -6,15 +6,31 @@ import IconButton from '@mui/material/IconButton';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 
+import noCover from '../../../assets/img/noCover.png';
 import { useAppSelector } from '../../../common/hooks/hooks';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 import { DeletePackAndCard } from '../../../components/modals/DeletePackAndCard';
 
 export const Card = React.memo(
-  ({ answer, grade, lastUpdated, question, cardId, packId, authorId }: CardPropsType) => {
+  ({
+    answer,
+    grade,
+    lastUpdated,
+    question,
+    cardId,
+    packId,
+    authorId,
+    questionImg,
+  }: CardPropsType) => {
     const updatedDate = new Date(lastUpdated).toLocaleDateString('ru');
     const status = useAppSelector(state => state.app.status);
     const userId = useAppSelector(state => state.profile._id);
+
+    const [isDeckCoverBroken, setIsDeckCoverBroke] = useState(false);
+
+    const deckCoverErrorHandler = () => {
+      setIsDeckCoverBroke(true);
+    };
 
     // Modals
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -28,7 +44,18 @@ export const Card = React.memo(
 
     return (
       <div className="pack">
-        <div className="pack__col cut">{question}</div>
+        <div className="pack__col cut">
+          {questionImg ? (
+            <img
+              src={isDeckCoverBroken ? noCover : questionImg}
+              alt="deckCover"
+              className="pack__cover"
+              onError={deckCoverErrorHandler}
+            />
+          ) : (
+            <div className="cut">{question}</div>
+          )}
+        </div>
         <div className="pack__col cut">{answer}</div>
         <div className="pack__col">{updatedDate}</div>
         <div className="pack__col">
@@ -64,6 +91,8 @@ export const Card = React.memo(
           open={editModalOpen}
           question={question}
           answer={answer}
+          questionImg={questionImg}
+          cardWork="edit"
         />
         <DeletePackAndCard
           open={deleteModalOpen}
@@ -86,4 +115,5 @@ type CardPropsType = {
   packId: string;
   cardId: string;
   authorId: string;
+  questionImg: string;
 };

@@ -6,13 +6,23 @@ export const cardsApi = {
       params: { ...params },
     });
   },
-  postCard(card: { cardsPack_id: string; question: string; answer: string }) {
+  postCard(card: {
+    cardsPack_id: string;
+    question: string;
+    answer: string;
+    questionImg: string;
+  }) {
     return instance.post(`cards/card`, { card });
   },
   deleteCard(params: { id: string }) {
     return instance.delete('cards/card', { params });
   },
-  updateCard(card: { _id: string; question: string; answer?: string }) {
+  updateCard(card: {
+    _id: string;
+    question: string;
+    answer?: string;
+    questionImg: string;
+  }) {
     return instance.put('cards/card', { card });
   },
   gradeCard(gradeData: GradeDataType) {

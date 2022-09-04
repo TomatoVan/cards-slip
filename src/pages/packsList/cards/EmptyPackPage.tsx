@@ -57,6 +57,8 @@ export const EmptyPackPage = React.memo(
                   packId={id}
                   answer=""
                   question=""
+                  questionImg=""
+                  cardWork="add"
                 />
               )}
             </div>

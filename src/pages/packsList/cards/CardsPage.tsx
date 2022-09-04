@@ -128,6 +128,7 @@ export const CardsPage = () => {
                 answer={el.answer}
                 grade={el.grade}
                 lastUpdated={el.updated}
+                questionImg={el.questionImg}
               />
             );
           })}
@@ -142,6 +143,8 @@ export const CardsPage = () => {
         packId={id}
         answer=""
         question=""
+        questionImg=""
+        cardWork="add"
       />
     </div>
   );
