@@ -52,6 +52,7 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
           <input
             id="avatar"
             type="file"
+            accept={'image/*'}
             onChange={uploadHandler}
             ref={inputRef}
             className="avatar__inputHide"

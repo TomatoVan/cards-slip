@@ -165,6 +165,7 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
             <input
               id="cover"
               type="file"
+              accept={'image/*'}
               onChange={uploadHandler}
               className="avatar__inputHide"
             />
