@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { setError } from '../../app/appReducer';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import {
   setPacksOfAllUsers,
@@ -41,9 +42,11 @@ export const Filter = React.memo(({ accessoryQueryFilter }: PropsType) => {
   useEffect(() => {
     if (accessoryQueryFilter === 'My') {
       setIsActive(true);
-    } else {
+    } else if (accessoryQueryFilter === 'All') {
       setIsActive(false);
       navigate('/packs?accessory=All');
+    } else {
+      dispatch(setError('invalid accessory'));
     }
   }, [accessoryQueryFilter]);
 
