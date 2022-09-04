@@ -43,9 +43,10 @@ export const sendLoginData =
       const response = await authAPI.login(data);
 
       dispatch(setIsLoggedIn(true, response.data._id));
-      const { email, _id, name, publicCardPacksCount, avatar = 'ava' } = response.data;
+      const { email, _id, name, publicCardPacksCount, avatar } = response.data;
 
-      dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
+      if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
+      else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

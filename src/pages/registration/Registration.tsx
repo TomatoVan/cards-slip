@@ -1,7 +1,5 @@
-import { useState } from 'react';
-
 import { useFormik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { CustomButton } from '../../components/button/CustomButton';
@@ -19,8 +17,6 @@ export const Registration = () => {
   const dispatch = useAppDispatch();
   const send = useAppSelector(state => state.registration.send);
   const status = useAppSelector(state => state.app.status);
-
-  const [messageEmail, setMessageEmail] = useState<string>('example@mail.com');
 
   const formik = useFormik({
     initialValues: {
@@ -55,55 +51,43 @@ export const Registration = () => {
       };
 
       dispatch(sendRegistrationData(data));
-      setMessageEmail(values.email);
       formik.resetForm();
     },
   });
 
+  if (send) return <Navigate to="/" />;
+
   return (
     <div className="frame">
-      <div className="title">{send ? 'Check Email' : 'Sign Up'}</div>
-      {send ? (
-        <div className="registration">
-          <div className="registration__img" />
+      <div className="title">Sign Up</div>
+      <form className="form" onSubmit={formik.handleSubmit}>
+        <Input
+          placeholder="Email"
+          {...formik.getFieldProps('email')}
+          error={formik.errors.email && formik.touched.email}
+          errorText={formik.errors.email}
+        />
+        <Input
+          placeholder="Password"
+          password
+          {...formik.getFieldProps('password')}
+          error={formik.errors.password && formik.touched.password}
+          errorText={formik.errors.password}
+        />
+        <Input
+          placeholder="Confirm password"
+          password
+          {...formik.getFieldProps('confirm_password')}
+          error={formik.errors.confirm_password && formik.touched.confirm_password}
+          errorText={formik.errors.confirm_password}
+        />
+        <div className="submit">
+          <CustomButton title="Sign Up" disabled={status === 'loading'} submit />
         </div>
-      ) : (
-        <form className="form" onSubmit={formik.handleSubmit}>
-          <Input
-            placeholder="Email"
-            {...formik.getFieldProps('email')}
-            error={formik.errors.email && formik.touched.email}
-            errorText={formik.errors.email}
-          />
-          <Input
-            placeholder="Password"
-            password
-            {...formik.getFieldProps('password')}
-            error={formik.errors.password && formik.touched.password}
-            errorText={formik.errors.password}
-          />
-          <Input
-            placeholder="Confirm password"
-            password
-            {...formik.getFieldProps('confirm_password')}
-            error={formik.errors.confirm_password && formik.touched.confirm_password}
-            errorText={formik.errors.confirm_password}
-          />
-          <div className="submit">
-            <CustomButton title="Sign Up" disabled={status === 'loading'} submit />
-          </div>
-        </form>
-      )}
-      <div className="registration__text">
-        {send
-          ? `We’ve sent an Email with instructions to ${messageEmail}`
-          : 'Already have an account?'}
-      </div>
-      <NavLink
-        className={send ? 'button button--registration' : 'registration__link'}
-        to="/"
-      >
-        {send ? 'Back to login' : 'Sign In'}
+      </form>
+      <div className="registration__text">Already have an account?</div>
+      <NavLink className="registration__link" to="/">
+        Sign In
       </NavLink>
     </div>
   );

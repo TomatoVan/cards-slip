@@ -1,6 +1,7 @@
 import { registrationAPI, RegistrationDataType } from '../../api/RegistrationApi';
 import { changeAppStatus, setError } from '../../app/appReducer';
 import { AppThunkType } from '../../common/types/types';
+import { sendLoginData } from '../login/loginReducer';
 
 const initState = {
   send: false,
@@ -28,7 +29,7 @@ export const sendRegistrationData =
     dispatch(changeAppStatus('loading'));
     try {
       await registrationAPI.registration(data);
-
+      dispatch(sendLoginData({ ...data, rememberMe: false }));
       dispatch(changeStatusRegistration(true));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
