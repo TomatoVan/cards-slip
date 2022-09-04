@@ -45,15 +45,9 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
     }, [open]);
 
     // for name
-    const [packTitle, setPackTitle] = useState(name);
-
     useEffect(() => {
-      setPackTitle(name);
+      formik.values.packName = name;
     }, [name]);
-
-    useEffect(() => {
-      formik.values.packName = packTitle;
-    }, [packTitle]);
 
     // for deckCover
     const [isCoverBroken, setIsCoverBroke] = useState(false);
@@ -67,6 +61,7 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
       formik.values.deckCover = cover;
     }, [cover]);
 
+    // if cover img invalid
     const errorHandler = () => {
       setIsCoverBroke(true);
     };
@@ -91,7 +86,7 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
 
     const formik = useFormik({
       initialValues: {
-        packName: packTitle,
+        packName: name,
         privatePack: false,
         deckCover,
       },

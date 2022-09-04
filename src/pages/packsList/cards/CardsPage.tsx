@@ -136,6 +136,8 @@ export const CardsPage = () => {
         open={open}
         title="Add new card"
         packId={id}
+        answer=""
+        question=""
       />
     </div>
   );

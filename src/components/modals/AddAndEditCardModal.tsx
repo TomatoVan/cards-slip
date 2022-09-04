@@ -19,8 +19,8 @@ type PropsType = {
   title: string;
   packId: string;
   cardId?: string;
-  question?: string;
-  answer?: string;
+  question: string;
+  answer: string;
 };
 
 export const AddAndEditCardModal = React.memo(
@@ -29,22 +29,20 @@ export const AddAndEditCardModal = React.memo(
 
     const cardsPageCount = useAppSelector(state => state.cards.params.pageCount);
 
-    // for edit
-    let name = '';
-    let descr = '';
-
-    if (question) name = question;
-    if (answer) descr = answer;
-
-    // reset form after close
+    // for name
     useEffect(() => {
-      if (!open) formik.resetForm();
-    }, [open]);
+      formik.values.question = question;
+    }, [question]);
+
+    // for answer
+    useEffect(() => {
+      formik.values.answer = answer;
+    }, [answer]);
 
     const formik = useFormik({
       initialValues: {
-        question: name,
-        answer: descr,
+        question,
+        answer,
       },
       validate: values => {
         const errors: FormikErrorType = {};

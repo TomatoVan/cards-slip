@@ -49,6 +49,8 @@ export const EmptyPackPage = React.memo(({ packName, id }: EmptyPackPageType) =>
             open={open}
             title="Add new card"
             packId={id}
+            answer=""
+            question=""
           />
         )}
       </div>
