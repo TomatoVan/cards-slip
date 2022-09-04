@@ -51,7 +51,7 @@ export const Profile = () => {
         </div>
         <div className="profile__button">
           <CustomButton
-            title="logout"
+            title="Log out"
             submit={false}
             disabled={status === 'loading'}
             callBack={logout}

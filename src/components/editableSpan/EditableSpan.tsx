@@ -39,7 +39,7 @@ export const EditableSpan = React.memo(
     };
 
     return (
-      <div>
+      <div className="editableSpan">
         {field === 'input' ? (
           <TextField
             variant="standard"
@@ -48,10 +48,11 @@ export const EditableSpan = React.memo(
             onKeyDown={e => onKeyDownHandler(e)}
             value={value}
             autoFocus
+            inputProps={{ maxLength: 20 }}
           />
         ) : (
-          <div>
-            <span>{name}</span>
+          <div className="editableSpan__nameBlock">
+            <span className="editableSpan__name cut">{name}</span>
             <IconButton
               onClick={setEditModeHandler}
               aria-label="edit"

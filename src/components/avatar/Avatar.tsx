@@ -1,10 +1,8 @@
 import React, { ChangeEvent, useRef } from 'react';
 
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import IconButton from '@mui/material/IconButton';
-
 import { setError } from '../../app/appReducer';
 import defaultAvatar from '../../assets/img/avatar.png';
+import upload from '../../assets/img/uploadAvatar.svg';
 import { useAppDispatch } from '../../common/hooks/hooks';
 import { convertFileToBase64 } from '../../common/utils/Base64Converter';
 import { updateUserAvatar } from '../../pages/profile/profileReducer';
@@ -47,7 +45,7 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
           <img src={defaultAvatar} alt="avatar" onError={errorHandler} />
         )}
       </div>
-      <div className="avatar__icon">
+      <div>
         <label htmlFor="avatar">
           <input
             id="avatar"
@@ -57,9 +55,13 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
             ref={inputRef}
             className="avatar__inputHide"
           />
-          <IconButton onClick={selectFileHandler}>
-            <CloudUploadIcon />
-          </IconButton>
+          <input
+            className="avatar__icon"
+            type="image"
+            src={upload}
+            alt="upload"
+            onClick={selectFileHandler}
+          />
         </label>
       </div>
     </div>

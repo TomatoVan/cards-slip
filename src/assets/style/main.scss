@@ -241,10 +241,13 @@
   align-items: flex-end;
   justify-content: center;
   position: relative;
+  width: 100px;
+  height: 100px;
   &__icon {
+    width: 35px;
     position: absolute;
-    bottom: 10px;
-    right: 120px;
+    left: 60%;
+    top: 65%;
   }
   &__inputHide {
     display: none;
@@ -421,20 +424,37 @@
 }
 
 .profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   &__avatar img {
     width: 90px;
     height: 90px;
-    margin: 30px auto;
     border-radius: 50%;
   }
   &__name {
+    margin-top: 15px;
+    display: block;
     font-size: 20px;
     line-height: 24px;
   }
-  &__email, &__button, &__cards-count, &__name {
-    margin-top: 30px;
-    text-align: center;
+  &__email {
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
   }
+  &__cards-count {
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  &__button {
+    margin-top: 30px;
+  }
+
 }
 
 .user-data {
@@ -623,6 +643,19 @@
     margin-right: 10px;
   }
   &__name {
+  }
+}
+.editableSpan {
+  &__nameBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__name {
+    display: block;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 

@@ -37,7 +37,7 @@ export const setUserData = (
   _id: string,
   name: string,
   publicCardPacksCount: number,
-  avatar: string,
+  avatar: string | null,
 ) => {
   return {
     type: 'PROFILE/SET_USER_DATA',

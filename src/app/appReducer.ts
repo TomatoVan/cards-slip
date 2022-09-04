@@ -52,9 +52,10 @@ export const initializeApp = (): AppThunkType => async dispatch => {
     const auth = await authAPI.authMe();
 
     dispatch(setIsLoggedIn(true, auth.data._id));
-    const { email, _id, name, publicCardPacksCount, avatar = 'ava' } = auth.data;
+    const { email, _id, name, publicCardPacksCount, avatar } = auth.data;
 
-    dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
+    if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
+    else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
   } catch (err: any) {
     return;
   } finally {
