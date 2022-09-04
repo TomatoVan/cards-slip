@@ -146,11 +146,12 @@ export const addPack =
   (
     packName: string,
     packPrivate: boolean,
+    deckCover: string,
     profileUserId: string,
     currentFilter: string | null,
   ): AppThunkType =>
   async dispatch => {
-    const cardsPack = { name: packName, private: packPrivate };
+    const cardsPack = { name: packName, private: packPrivate, deckCover };
 
     dispatch(changeAppStatus('loading'));
     try {
@@ -183,16 +184,17 @@ export const deletePack =
     }
   };
 
-export const changePackName =
+export const changePack =
   (
     packId: string,
     name: string,
     packPrivate: boolean,
+    deckCover: string,
     profileUserId: string,
     currentFilter: string | null,
   ): AppThunkType =>
   async dispatch => {
-    const cardsPack = { _id: packId, name, private: packPrivate };
+    const cardsPack = { _id: packId, name, private: packPrivate, deckCover };
 
     dispatch(changeAppStatus('loading'));
     try {

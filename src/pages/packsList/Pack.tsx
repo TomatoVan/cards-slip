@@ -125,8 +125,10 @@ export const Pack = memo(
           title="Edit pack"
           id={id}
           name={name}
+          deckCover={deckCover || ''}
           handleClose={closeEditModalHandler}
           open={editModalOpen}
+          packWork="edit"
         />
         <DeletePackAndCard
           open={deleteModalOpen}
