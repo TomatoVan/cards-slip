@@ -58,9 +58,9 @@ export const App = () => {
         <NavLink className="navlink" to="/">
           login
         </NavLink>
-        <NavLink className="navlink" to="/set-new-password/*">
-          password-new
-        </NavLink>
+        {/* <NavLink className="navlink" to="/set-new-password/*"> */}
+        {/*  password-new */}
+        {/* </NavLink> */}
         <NavLink className="navlink" to="/password-recovery">
           password-recovery
         </NavLink>

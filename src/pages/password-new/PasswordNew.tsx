@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { CustomButton } from '../../components/button/CustomButton';
@@ -17,6 +17,7 @@ export const PasswordNew = () => {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(state => state.app.status);
+  const passwordChanged = useAppSelector(state => state.passwordNew.passwordChanged);
 
   const location = useLocation();
 
@@ -48,6 +49,8 @@ export const PasswordNew = () => {
       formik.resetForm();
     },
   });
+
+  if (passwordChanged) return <Navigate to="/" />;
 
   return (
     <div className="frame">
