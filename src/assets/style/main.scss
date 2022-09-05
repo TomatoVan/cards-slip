@@ -23,7 +23,7 @@
 }
 
 .content {
-  padding: 60px 0;
+  padding: 30px 0;
 }
 
 .container {
@@ -236,6 +236,12 @@
 
 }
 
+.cover {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .avatar {
   display: flex;
   align-items: flex-end;
@@ -291,6 +297,14 @@
   max-width: 420px;
   width: 100%;
   margin: 0 auto;
+  &__back {
+    cursor: pointer;
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+  }
 }
 
 .title {
@@ -517,6 +531,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
   }
 
   &__name {
@@ -725,16 +742,19 @@
     justify-content: center;
     align-items: center;
     width: 100px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
 
     &--blue {
       background-color: $blue;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 17px;
       color: white;
       margin-left: -2px;
       border-bottom-right-radius: 2px;
       border-top-right-radius: 2px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
     }
 
     &--light {
@@ -842,7 +862,7 @@
 .pagination {
   display: flex;
   justify-content: flex-end;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .empty-pack {

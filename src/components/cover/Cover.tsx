@@ -15,7 +15,7 @@ export const Cover = React.memo(({ cover, question, cardTitleCover }: PropsType)
   };
 
   return (
-    <div>
+    <div className="cover">
       {cover && (
         <img
           src={isDeckCoverBroken ? noCover : cover}
