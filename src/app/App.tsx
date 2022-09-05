@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { LinearProgress } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../common/hooks/hooks';
 import { HeaderContainer } from '../components/header/HeaderContainer';
@@ -32,14 +32,7 @@ export const App = () => {
 
   if (!isInitialized) {
     return (
-      <div
-        style={{
-          position: 'fixed',
-          top: '30%',
-          textAlign: 'center',
-          width: '100%',
-        }}
-      >
+      <div className="preloader">
         <CircularProgress />
       </div>
     );
@@ -53,27 +46,6 @@ export const App = () => {
       ) : (
         <div className="loadingBar" />
       )}
-      {/* для тестого перехода по страницам */}
-      <div className="test">
-        <NavLink className="navlink" to="/">
-          login
-        </NavLink>
-        {/* <NavLink className="navlink" to="/set-new-password/*"> */}
-        {/*  password-new */}
-        {/* </NavLink> */}
-        <NavLink className="navlink" to="/password-recovery">
-          password-recovery
-        </NavLink>
-        <NavLink className="navlink" to="/registration">
-          registration
-        </NavLink>
-        <NavLink className="navlink" to="/profile">
-          profile
-        </NavLink>
-        <NavLink className="navlink" to="/packs?accessory=All">
-          packs
-        </NavLink>
-      </div>
       <div className="content">
         <div className="container">
           <Routes>
