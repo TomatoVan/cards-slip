@@ -242,6 +242,13 @@
   align-items: center;
 }
 
+.preloader {
+  position: fixed;
+  top: 30%;
+  text-align: center;
+  width: 100%;
+}
+
 .avatar {
   display: flex;
   align-items: flex-end;
@@ -299,7 +306,7 @@
   margin: 0 auto;
   &__back {
     cursor: pointer;
-    width: 150px;
+    width: 110px;
     display: flex;
     justify-content: space-around;
     align-items: center;
