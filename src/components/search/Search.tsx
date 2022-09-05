@@ -14,7 +14,7 @@ export const Search = React.memo(({ location }: PropsType) => {
   const disabled = useAppSelector(state => state.app.status);
   const searchValue = useAppSelector(state => state.packs.params.packName);
 
-  const delay = 500;
+  const delay = 800;
   const [value, setValue] = useState('');
 
   const debouncedValue = useDebounce<string>(value, delay);
