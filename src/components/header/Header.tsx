@@ -3,28 +3,32 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import defaultAvatar from '../../assets/img/avatar.png';
-import logo from '../../assets/img/logo.svg';
+import logo from '../../assets/img/logo.png';
 import { CustomButton } from '../button/CustomButton';
 
 export const Header = React.memo(
   ({ isAuth, userName, avatar, navToSignIn }: HeaderPropsType) => {
     const navigate = useNavigate();
-    const navigateHandler = () => {
+    const navigatePacksHandler = () => {
+      navigate('/packs?accessory=All');
+    };
+    const navigateProfileHandler = () => {
       navigate('/profile');
     };
 
     return (
       <header className="header">
         <div className="container container--header">
-          <div className="logo">
-            <img src={logo} alt="Logo" />
+          <div className="header__title" onClick={navigatePacksHandler}>
+            <img src={logo} alt="Logo" className="header__logo" />
+            <div className="header__text">CARDS SLIP</div>
           </div>
           {isAuth ? (
             <div className="user-data">
-              <div className="user-data__name" onClick={navigateHandler}>
+              <div className="user-data__name" onClick={navigateProfileHandler}>
                 {userName}
               </div>
-              <div className="user-data__avatar" onClick={navigateHandler}>
+              <div className="user-data__avatar" onClick={navigateProfileHandler}>
                 {avatar ? (
                   <img src={avatar} alt="avatar" className="user-data__avatarImg" />
                 ) : (
