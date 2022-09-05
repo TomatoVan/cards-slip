@@ -18,7 +18,7 @@ export const Pagination = React.memo(({ location }: PropsType) => {
   const status = useAppSelector(state => state.app.status);
   const isDisabled = status === 'loading';
 
-  const initRowsPerPage = 10;
+  const initRowsPerPage = 7;
 
   const [rowsPerPage, setRowsPerPage] = useState(initRowsPerPage);
   const [page, setPage] = useState(1);
@@ -90,6 +90,12 @@ export const Pagination = React.memo(({ location }: PropsType) => {
                     page={page - 1}
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}
+                    rowsPerPageOptions={[
+                      Number('7'),
+                      Number('10'),
+                      Number('15'),
+                      Number('25'),
+                    ]}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                   />
                 )}

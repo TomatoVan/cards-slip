@@ -5,24 +5,24 @@ import { AppThunkType } from '../../common/types/types';
 import { setIsLoggedIn } from '../login/loginReducer';
 
 const initState = {
-  user_id: undefined, // pack id
-  cardPacks: [], // all packs
-  cardPacksTotalCount: 10, // all packs count
-  minCardsCount: 0, // min cards number
-  maxCardsCount: 110, // max cards number
-  page: 1, // for pagination
-  pageCount: 10, // count element ui (number of  packs on page)
+  user_id: undefined,
+  cardPacks: [],
+  cardPacksTotalCount: 10,
+  minCardsCount: 0,
+  maxCardsCount: 110,
+  page: 1,
+  pageCount: 7,
   search: null,
   sortPacks: sortingMethods.DES_UPDATE,
   params: {
     user_id: undefined,
     page: 1,
-    pageCount: 10, // 10/25/50
+    pageCount: 7,
     sortPacks: sortingMethods.DES_UPDATE,
-    min: 0, // min cards for selector
-    max: 110, // max cards for selector
-    cardPacksTotalCount: 10, // all
-    packName: '', // search
+    min: 0,
+    max: 110,
+    cardPacksTotalCount: 10,
+    packName: '',
   },
 };
 
@@ -82,7 +82,7 @@ export const packsReducer = (
           user_id: actions.userId,
           max: 110,
           page: 1,
-          pageCount: 10,
+          pageCount: 7,
           sortPacks: sortingMethods.DES_UPDATE,
           cardPacksTotalCount: 10,
         },
