@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks';
 import { CustomButton } from '../../../components/button/CustomButton';
+import { Cover } from '../../../components/cover/Cover';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 import { Pagination } from '../../../components/pagination/Pagination';
 import { Search } from '../../../components/search/Search';
@@ -32,6 +33,7 @@ export const CardsPage = () => {
   const { packName } = location.state as LocationStateType;
   const { id } = location.state as LocationStateType;
   const { authorId } = location.state as LocationStateType;
+  const { deckCover } = location.state as LocationStateType;
 
   // For empty elements
   const emptySearchResults = cards.length === 0 && cardQuestion !== '';
@@ -70,7 +72,14 @@ export const CardsPage = () => {
   };
 
   if (cards.length === 0 && cardQuestion === '') {
-    return <EmptyPackPage packName={packName} id={id} authorId={authorId} />;
+    return (
+      <EmptyPackPage
+        packName={packName}
+        id={id}
+        authorId={authorId}
+        deckCover={deckCover}
+      />
+    );
   }
 
   return (
@@ -82,15 +91,18 @@ export const CardsPage = () => {
         </div>
       </div>
       <div className="cards__learn">
-        <div className="cards__title cut">{packName}</div>
-        <IconButton
-          onClick={learnAboutPackHandler}
-          className="pack__button pack__button--teach"
-          aria-label="learn"
-          disabled={status === 'loading'}
-        >
-          <SchoolIcon fontSize="inherit" />
-        </IconButton>
+        <div className="cards__title">
+          <div className="cards__name cut">{packName}</div>
+          <IconButton
+            onClick={learnAboutPackHandler}
+            className="pack__button pack__button--teach"
+            aria-label="learn"
+            disabled={status === 'loading'}
+          >
+            <SchoolIcon fontSize="inherit" />
+          </IconButton>
+        </div>
+        <Cover cover={deckCover} cardTitleCover />
       </div>
       <div className="cards__menu">
         <Search location="Cards" />
@@ -154,4 +166,5 @@ export type LocationStateType = {
   packName: string;
   id: string;
   authorId: string;
+  deckCover: string | null;
 };

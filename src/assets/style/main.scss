@@ -492,8 +492,13 @@
     justify-content: space-between;
     margin-bottom: 40px;
   }
-
   &__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__name {
     font-weight: 600;
     font-size: 22px;
     line-height: 27px;
@@ -502,10 +507,15 @@
 
   }
 
+  &__cover {
+    width: 170px;
+    height: 107px;
+  }
   &__learn {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 
   }
 
@@ -641,6 +651,11 @@
     height: 36px;
     border-radius: 2px;
     margin-right: 10px;
+  }
+  &__cover-big {
+    width: 170px;
+    height: 110px;
+    border-radius: 2px;
   }
   &__name {
   }

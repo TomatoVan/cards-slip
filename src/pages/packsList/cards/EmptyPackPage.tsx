@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../../common/hooks/hooks';
 import { CustomButton } from '../../../components/button/CustomButton';
+import { Cover } from '../../../components/cover/Cover';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 
 export const EmptyPackPage = React.memo(
-  ({ packName, id, authorId }: EmptyPackPageType) => {
+  ({ packName, id, authorId, deckCover }: EmptyPackPageType) => {
     const status = useAppSelector(state => state.app.status);
     const userId = useAppSelector(state => state.profile._id);
 
@@ -34,9 +35,12 @@ export const EmptyPackPage = React.memo(
             Back to Packs List
           </div>
         </div>
-        <div className="cards__title cut">{packName}</div>
-        {/* {userId !== authorId || status === 'loading'} */}
-        <div />
+        <div className="cards__learn">
+          <div className="cards__title">
+            <div className="cards__name cut">{packName}</div>
+          </div>
+          {deckCover && <Cover cover={deckCover} cardTitleCover />}
+        </div>
         <div>
           {userId === authorId ? (
             <div className="empty-pack__flex">
@@ -75,4 +79,5 @@ type EmptyPackPageType = {
   packName?: string;
   id?: string;
   authorId?: string;
+  deckCover?: string | null;
 };
