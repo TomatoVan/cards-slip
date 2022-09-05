@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../common/hooks/hooks';
 import { ClearAll } from '../../components/clearAll/ClearAll';
@@ -15,6 +15,7 @@ import { Packs } from './Packs';
 
 export const PacksPage = () => {
   const status = useAppSelector(state => state.app.status);
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   // to find query
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,6 +26,8 @@ export const PacksPage = () => {
 
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+
+  if (!isLoggedIn) return <Navigate to="/" />;
 
   return (
     <div className="cards">

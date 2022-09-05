@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SchoolIcon from '@mui/icons-material/School';
 import IconButton from '@mui/material/IconButton';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks';
 import { Cover } from '../../../components/cover/Cover';
@@ -29,6 +29,7 @@ export const CardsPage = () => {
   const sortCards = useAppSelector(state => state.cards.params.sortCards);
   const status = useAppSelector(state => state.app.status);
   const userId = useAppSelector(state => state.profile._id);
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   const { packName } = location.state as LocationStateType;
   const { id } = location.state as LocationStateType;
@@ -81,6 +82,8 @@ export const CardsPage = () => {
       />
     );
   }
+
+  if (!isLoggedIn) return <Navigate to="/" />;
 
   return (
     <div className="cards">

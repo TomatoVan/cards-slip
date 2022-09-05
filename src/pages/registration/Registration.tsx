@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useFormik } from 'formik';
 import { Navigate, NavLink } from 'react-router-dom';
 
@@ -17,6 +19,7 @@ export const Registration = () => {
   const dispatch = useAppDispatch();
   const send = useAppSelector(state => state.registration.send);
   const status = useAppSelector(state => state.app.status);
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   const formik = useFormik({
     initialValues: {
@@ -56,6 +59,7 @@ export const Registration = () => {
   });
 
   if (send) return <Navigate to="/" />;
+  if (isLoggedIn) return <Navigate to="/profile" />;
 
   return (
     <div className="frame">

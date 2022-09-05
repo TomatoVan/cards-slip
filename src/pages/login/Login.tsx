@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useFormik } from 'formik';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { CustomButton } from '../../components/customButton/CustomButton';
@@ -21,13 +21,6 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const status = useAppSelector(state => state.app.status);
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/profile');
-    }
-  }, [isLoggedIn, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -61,6 +54,8 @@ export const Login = () => {
     },
   });
 
+  if (isLoggedIn) return <Navigate to="/profile" />;
+
   return (
     <div className="frame">
       <div className="title">Sign in</div>
@@ -79,6 +74,7 @@ export const Login = () => {
           errorText={formik.errors.password}
         />
         <FormControlLabel
+          style={{ marginLeft: 0 }}
           label="Remember me"
           labelPlacement="start"
           control={

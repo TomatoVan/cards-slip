@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../../common/hooks/hooks';
 import { Cover } from '../../../components/cover/Cover';
@@ -12,6 +12,7 @@ export const EmptyPackPage = React.memo(
   ({ packName, id, authorId, deckCover }: EmptyPackPageType) => {
     const status = useAppSelector(state => state.app.status);
     const userId = useAppSelector(state => state.profile._id);
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
     const navigate = useNavigate();
 
@@ -26,6 +27,8 @@ export const EmptyPackPage = React.memo(
     const handleClose = () => setOpen(false);
 
     const handleOpen = () => setOpen(true);
+
+    if (!isLoggedIn) return <Navigate to="/" />;
 
     return (
       <div className="cards">

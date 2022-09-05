@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useFormik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { CustomButton } from '../../components/customButton/CustomButton';
@@ -17,6 +17,7 @@ export const PasswordRecovery = () => {
   const dispatch = useAppDispatch();
   const emailSent = useAppSelector(state => state.passwordRecovery.sendEmailRecovery);
   const status = useAppSelector(state => state.app.status);
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   const [messageEmail, setMessageEmail] = useState<string>('example@mail.com');
 
@@ -41,6 +42,8 @@ export const PasswordRecovery = () => {
       formik.resetForm();
     },
   });
+
+  if (isLoggedIn) return <Navigate to="/profile" />;
 
   return (
     <div className="frame">

@@ -18,6 +18,7 @@ export const PasswordNew = () => {
 
   const status = useAppSelector(state => state.app.status);
   const passwordChanged = useAppSelector(state => state.passwordNew.passwordChanged);
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   const location = useLocation();
 
@@ -51,6 +52,7 @@ export const PasswordNew = () => {
   });
 
   if (passwordChanged) return <Navigate to="/" />;
+  if (isLoggedIn) return <Navigate to="/profile" />;
 
   return (
     <div className="frame">

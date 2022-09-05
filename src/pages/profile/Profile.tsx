@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { Avatar } from '../../components/avatar/Avatar';
@@ -32,17 +32,13 @@ export const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn]);
+  if (!isLoggedIn) return <Navigate to="/" />;
 
   return (
     <div className="frame">
       <div onClick={navToPacksList} className="frame__back">
         <ArrowBackIcon />
-        Back to Packs
+        To Packs
       </div>
       <div className="profile">
         <div className="title">Personal Information</div>
