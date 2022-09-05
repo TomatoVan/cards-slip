@@ -6,8 +6,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CardType } from '../../api/CardsApi';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { getCard } from '../../common/utils/smartRandomizer';
-import { CustomButton } from '../../components/button/CustomButton';
 import { Cover } from '../../components/cover/Cover';
+import { CustomButton } from '../../components/customButton/CustomButton';
 import { LocationStateType } from '../packsList/cards/CardsPage';
 import { getCards, putCardGrade } from '../packsList/cards/cardsReducer';
 

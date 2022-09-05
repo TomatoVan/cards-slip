@@ -4,8 +4,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../../common/hooks/hooks';
-import { CustomButton } from '../../../components/button/CustomButton';
 import { Cover } from '../../../components/cover/Cover';
+import { CustomButton } from '../../../components/customButton/CustomButton';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 
 export const EmptyPackPage = React.memo(

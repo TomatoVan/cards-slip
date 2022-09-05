@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { deleteCard } from '../../pages/packsList/cards/cardsReducer';
 import { deletePack } from '../../pages/packsList/packsReducer';
-import { CustomButton } from '../button/CustomButton';
+import { CustomButton } from '../customButton/CustomButton';
 
 import { CustomModal } from './CustomModal';
 

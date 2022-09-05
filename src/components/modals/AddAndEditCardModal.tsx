@@ -9,7 +9,7 @@ import noCover from '../../assets/img/noCover.png';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { convertFileToBase64 } from '../../common/utils/Base64Converter';
 import { addCard, changeCard } from '../../pages/packsList/cards/cardsReducer';
-import { CustomButton } from '../button/CustomButton';
+import { CustomButton } from '../customButton/CustomButton';
 import { Input } from '../input/Input';
 
 import { CustomModal } from './CustomModal';

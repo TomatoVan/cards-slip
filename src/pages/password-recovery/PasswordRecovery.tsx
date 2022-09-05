@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { CustomButton } from '../../components/button/CustomButton';
+import { CustomButton } from '../../components/customButton/CustomButton';
 import { Input } from '../../components/input/Input';
 
 import { sendPasswordRecoveryData } from './passwordRecoveryReducer';

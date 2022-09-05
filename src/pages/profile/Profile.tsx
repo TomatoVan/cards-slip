@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { Avatar } from '../../components/avatar/Avatar';
-import { CustomButton } from '../../components/button/CustomButton';
+import { CustomButton } from '../../components/customButton/CustomButton';
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { logoutTC } from '../login/loginReducer';
 
@@ -25,6 +26,12 @@ export const Profile = () => {
   const logout = () => dispatch(logoutTC());
   const updateUserInfoHandler = (newTitle: string) => dispatch(updateUserName(newTitle));
 
+  const navToPacksList = () => {
+    if (status === 'idle') {
+      navigate('/packs?accessory=All');
+    }
+  };
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
@@ -33,6 +40,10 @@ export const Profile = () => {
 
   return (
     <div className="frame">
+      <div onClick={navToPacksList} className="frame__back">
+        <ArrowBackIcon />
+        Back to Packs
+      </div>
       <div className="profile">
         <div className="title">Personal Information</div>
         <div className="profile__avatar">

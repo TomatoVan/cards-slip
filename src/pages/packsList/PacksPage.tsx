@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../common/hooks/hooks';
-import { CustomButton } from '../../components/button/CustomButton';
 import { ClearAll } from '../../components/clearAll/ClearAll';
+import { CustomButton } from '../../components/customButton/CustomButton';
 import { Filter } from '../../components/filter/Filter';
 import { AddAndEditPackModal } from '../../components/modals/AddAndEditPackModal';
 import { Pagination } from '../../components/pagination/Pagination';

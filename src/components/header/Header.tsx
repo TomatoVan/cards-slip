@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import defaultAvatar from '../../assets/img/avatar.png';
 import logo from '../../assets/img/logo.png';
-import { CustomButton } from '../button/CustomButton';
+import { CustomButton } from '../customButton/CustomButton';
 
 export const Header = React.memo(
   ({ isAuth, userName, avatar, navToSignIn }: HeaderPropsType) => {

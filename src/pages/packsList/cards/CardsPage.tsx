@@ -6,8 +6,8 @@ import IconButton from '@mui/material/IconButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../common/hooks/hooks';
-import { CustomButton } from '../../../components/button/CustomButton';
 import { Cover } from '../../../components/cover/Cover';
+import { CustomButton } from '../../../components/customButton/CustomButton';
 import { AddAndEditCardModal } from '../../../components/modals/AddAndEditCardModal';
 import { Pagination } from '../../../components/pagination/Pagination';
 import { Search } from '../../../components/search/Search';
