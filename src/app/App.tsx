@@ -13,7 +13,7 @@ import { LearnPage } from '../pages/learnPage/LearnPage';
 import { Login } from '../pages/login/Login';
 import { CardsPage } from '../pages/packsList/cards/CardsPage';
 import { EmptyPackPage } from '../pages/packsList/cards/EmptyPackPage';
-import { PacksList } from '../pages/packsList/PacksList';
+import { PacksPage } from '../pages/packsList/PacksPage';
 import { PasswordNew } from '../pages/password-new/PasswordNew';
 import { PasswordRecovery } from '../pages/password-recovery/PasswordRecovery';
 import { Profile } from '../pages/profile/Profile';
@@ -80,7 +80,7 @@ export const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="set-new-password/*" element={<PasswordNew />} />
             <Route path="password-recovery" element={<PasswordRecovery />} />
-            <Route path="packs" element={<PacksList />} />
+            <Route path="packs" element={<PacksPage />} />
             <Route path="registration" element={<Registration />} />
             <Route path="profile" element={<Profile />} />
             <Route path="404" element={<NotFound />} />

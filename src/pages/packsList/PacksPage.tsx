@@ -13,7 +13,7 @@ import { Search } from '../../components/search/Search';
 
 import { Packs } from './Packs';
 
-export const PacksList = () => {
+export const PacksPage = () => {
   const status = useAppSelector(state => state.app.status);
 
   // to find query
