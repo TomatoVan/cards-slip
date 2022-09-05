@@ -73,7 +73,14 @@ export const cardsReducer = (state = initState, action: CardsActionsType): Cards
       };
     }
     case 'CARDS/SET-UPDATED-CARD': {
-      return { ...state, cards: [...state.cards, action.payload.updatedGrade] };
+      return {
+        ...state,
+        cards: state.cards.map(card =>
+          card.card_id === action.payload.cardId
+            ? { ...card, ...action.payload.updatedGrade }
+            : card,
+        ),
+      };
     }
     default:
       return state;
@@ -96,8 +103,8 @@ export const getCardsByTitle = (title: string) => {
 export const setResetCardsParams = () => {
   return { type: 'CARDS/SET-RESET-CARDS-PARAMS' } as const;
 };
-export const setUpdatedCard = (updatedGrade: any) => {
-  return { type: 'CARDS/SET-UPDATED-CARD', payload: { updatedGrade } } as const;
+export const setUpdatedCard = (updatedGrade: any, cardId: string) => {
+  return { type: 'CARDS/SET-UPDATED-CARD', payload: { updatedGrade, cardId } } as const;
 };
 
 export const getCards =
@@ -187,17 +194,18 @@ export const changeCard =
   };
 
 export const putCardGrade =
-  (gradeData: GradeDataType): AppThunkType =>
+  (packId: string, gradeData: GradeDataType): AppThunkType =>
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
       const response = await cardsApi.gradeCard(gradeData);
 
-      dispatch(setUpdatedCard(response.data.updatedGrade));
+      dispatch(
+        setUpdatedCard(response.data.updatedGrade, response.data.updatedGrade.card_id),
+      );
+      dispatch(getCards(packId, Infinity));
     } catch (err: any) {
-      return;
-    } finally {
-      dispatch(changeAppStatus('idle'));
+      dispatch(setError(err.response.data.error));
     }
   };
 

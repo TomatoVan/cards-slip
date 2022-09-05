@@ -563,17 +563,23 @@
   &__question {
 
   }
+  &__item {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
 
   &__question-name {
     overflow-wrap: break-word;
     font-size: 16px;
-    padding: 25px 0;
   }
   &__answer {
+    margin-top: 10px;
     overflow-wrap: break-word;
   }
 
   &__answer-count {
+    text-align: center;
     padding: 13px 0;
     opacity: 50%;
     font-weight: 600;
@@ -593,6 +599,10 @@
   &__disabled {
     display: none;
   }
+}
+
+.grades {
+  margin: 25px 0 15px 0;
 }
 
 .packs {

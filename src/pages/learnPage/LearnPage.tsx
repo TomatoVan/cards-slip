@@ -5,44 +5,28 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { CardType } from '../../api/CardsApi';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
+import { getCard } from '../../common/utils/smartRandomizer';
 import { CustomButton } from '../../components/button/CustomButton';
+import { Cover } from '../../components/cover/Cover';
 import { LocationStateType } from '../packsList/cards/CardsPage';
 import { getCards, putCardGrade } from '../packsList/cards/cardsReducer';
 
 import { Grades } from './grades/Grades';
-
-const getCard = (cards: CardType[]) => {
-  const maxGradeValue = 6;
-  const sum = cards.reduce(
-    (acc, card) => acc + (maxGradeValue - card.grade) * (maxGradeValue - card.grade),
-    0,
-  );
-  const rand = Math.random() * sum;
-  const res = cards.reduce(
-    (acc: { sum: number; id: number }, card, i) => {
-      const newSum =
-        acc.sum + (maxGradeValue - card.grade) * (maxGradeValue - card.grade);
-
-      return { sum: newSum, id: newSum < rand ? i : acc.id };
-    },
-    { sum: 0, id: -1 },
-  );
-
-  return cards[res.id + 1];
-};
 
 export const LearnPage = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [first, setFirst] = useState<boolean>(true);
   const [grade, setGrade] = useState(0);
   const [error, setError] = useState('disabled');
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
+
   const { id } = useParams<{ id: string }>();
-  const disabled = useAppSelector(state => state.app.status);
-  const cards = useAppSelector(state => state.cards.cards);
   const { packName } = location.state as LocationStateType;
+  const status = useAppSelector(state => state.app.status);
+  const cards = useAppSelector(state => state.cards.cards);
 
   const [card, setCard] = useState<CardType>({
     _id: '',
@@ -68,15 +52,16 @@ export const LearnPage = () => {
 
   useEffect(() => {
     if (first && id) {
-      // передаем бесконечность чтобы возвращало все карточки пака
+      // should return all pack cards
       dispatch(getCards(id, Infinity));
       setFirst(false);
     }
 
     if (cards.length > 0) setCard(getCard(cards));
   }, [dispatch, id, cards]);
+
   const navToPacksList = () => {
-    if (disabled === 'idle') {
+    if (status === 'idle') {
       navigate('/packs?accessory=All');
     }
   };
@@ -87,7 +72,7 @@ export const LearnPage = () => {
 
   const nextQuestion = () => {
     if (grade !== 0) {
-      dispatch(putCardGrade({ grade, card_id: card._id }));
+      if (id) dispatch(putCardGrade(id, { grade, card_id: card._id }));
       setShowAnswer(false);
       setGrade(0);
       setError('disabled');
@@ -103,25 +88,42 @@ export const LearnPage = () => {
       <div className="frame">
         <h3 className="title">{packName}</h3>
         <div className="learn__question">
-          <div className="learn__question-name">
-            <b>Question:</b>
-            <span>{card.question}</span>
-          </div>
-          <div className="learn__answer-count">
-            Количество попыток ответов на вопрос: {card.shots}
-          </div>
+          {status === 'loading' ? null : (
+            <>
+              <div className="learn__question-name">
+                {card.question === 'no question' ? (
+                  <>
+                    <b className="learn__item">Cover:</b>
+                    <Cover cover={card.questionImg} />
+                  </>
+                ) : (
+                  <>
+                    <b className="learn__item">Question: </b>
+                    <span>{card.question}</span>
+                  </>
+                )}
+              </div>
+              <div className="learn__answer-count">
+                Attempts to answer the question: {card.shots}
+              </div>
+            </>
+          )}
         </div>
-        <div className="learn__btn">
-          <CustomButton
-            callBack={handleSetShowAnswer}
-            title="Show answer"
-            submit={false}
-          />
-        </div>
+        {!showAnswer && (
+          <div className="learn__btn">
+            <CustomButton
+              callBack={handleSetShowAnswer}
+              title="Show answer"
+              submit={false}
+              disabled={status === 'loading'}
+            />
+          </div>
+        )}
+
         {showAnswer && (
           <div className="learn__answer">
             <div>
-              <b>Answer:</b>
+              <b className="learn__item">Answer: </b>
               <span>{card.answer}</span>
             </div>
             <div className={`learn__${error}`}>You should chose one</div>

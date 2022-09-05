@@ -25,18 +25,20 @@ export const Grades = React.memo(({ setGrade }: PropsType) => {
   };
 
   return (
-    <FormControl>
-      <FormLabel>Rate yourself:</FormLabel>
-      <RadioGroup onChange={onChangeRadioHandle}>
-        {grades.map(grade => (
-          <FormControlLabel
-            key={grade.id}
-            value={grade.value}
-            control={<Radio />}
-            label={grade.label}
-          />
-        ))}
-      </RadioGroup>
-    </FormControl>
+    <div className="grades">
+      <FormControl>
+        <FormLabel>Rate yourself:</FormLabel>
+        <RadioGroup onChange={onChangeRadioHandle}>
+          {grades.map(grade => (
+            <FormControlLabel
+              key={grade.id}
+              value={grade.value}
+              control={<Radio />}
+              label={grade.label}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
+    </div>
   );
 });
