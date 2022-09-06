@@ -59,7 +59,7 @@ export const Registration = () => {
   });
 
   if (send) return <Navigate to="/" />;
-  if (isLoggedIn) return <Navigate to="/profile" />;
+  if (isLoggedIn) return <Navigate to="/packs?accessory=All" />;
 
   return (
     <div className="frame">

@@ -43,7 +43,7 @@ export const PasswordRecovery = () => {
     },
   });
 
-  if (isLoggedIn) return <Navigate to="/profile" />;
+  if (isLoggedIn) return <Navigate to="/packs?accessory=All" />;
 
   return (
     <div className="frame">
