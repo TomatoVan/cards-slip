@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-import { LinearProgress } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../common/hooks/hooks';
 import { HeaderContainer } from '../components/header/HeaderContainer';
+import { LinearProgressBar } from '../components/linearProgressBar/LinearProgressBar';
 import { ErrorSnackBar } from '../components/snackbars/ErrorSnackbar';
 import { SuccessSnackBar } from '../components/snackbars/SuccessSnackbar';
 import { NotFound } from '../pages/404/NotFound';
@@ -24,7 +24,6 @@ import { initializeApp } from './appReducer';
 export const App = () => {
   const dispatch = useAppDispatch();
   const isInitialized = useAppSelector(state => state.app.isInitialized);
-  const status = useAppSelector(state => state.app.status);
 
   useEffect(() => {
     dispatch(initializeApp());
@@ -41,11 +40,7 @@ export const App = () => {
   return (
     <div className="app">
       <HeaderContainer />
-      {status === 'loading' ? (
-        <LinearProgress color="primary" />
-      ) : (
-        <div className="loadingBar" />
-      )}
+      <LinearProgressBar />
       <div className="content">
         <div className="container">
           <Routes>
