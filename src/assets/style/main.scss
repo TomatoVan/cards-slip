@@ -567,9 +567,15 @@
   &__menu {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 25px;
+    align-items: center;
+    margin: 0 auto 25px;
+    flex-wrap: wrap;
+    @media screen and (max-width: 1200px){
+      display: flex;
+      justify-content: center;
+    }
   }
+
 
   &__back {
     cursor: pointer;
@@ -586,6 +592,7 @@
   border-radius: 2px;
   width: 40px;
   height: 40px;
+
 }
 
 .learn {
@@ -661,6 +668,10 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     border-bottom: 1px solid #D9D9D9;
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+      padding: 15px 15px;
+    }
   }
 
   &__caption {
@@ -672,6 +683,16 @@
 
     &--sorting {
       cursor: pointer;
+    }
+    &--lastUpdate {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+    &--grade {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
     }
   }
 }
@@ -688,6 +709,27 @@
   transition: background-color .2s ease-in-out;
   cursor: pointer;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 15px 15px;
+  }
+  &__col {
+    &--lastUpdate {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+    &--author {
+      @media screen and (max-width: 768px) {
+        width: 50px;
+      }
+    }
+    &--rating {
+      @media screen and (max-width: 768px) {
+       display: none;
+      }
+    }
+  }
 
   &:hover {
     background-color: #f8f7f7;
@@ -700,6 +742,12 @@
     width: 250px;
     display: flex;
     align-items: center;
+    @media screen and (max-width: 1200px) {
+    width: 150px;
+  }
+    @media screen and (max-width: 425px) {
+      width: 75px;
+    }
   }
   &__cover {
     width: 57px;
@@ -731,6 +779,9 @@
 
 .filter {
   margin-right: 20px;
+  @media screen and (max-width: 1200px) {
+    margin-top: 10px;
+  }
 
   &__title {
     font-weight: 500;
@@ -782,6 +833,9 @@
 
 .slider {
   width: 450px;
+  @media screen and (max-width: 1200px) {
+    width: 250px;
+  }
   &__title {
     font-weight: 500;
     font-size: 14px;
@@ -797,11 +851,15 @@
   &__input {
     width: 40px;
     height: 40px;
-    margin: 0 20px;
+    margin-right: 20px;
     text-align: center;
     background: #FFFFFF;
     border: 1px solid #D9D9D9;
     border-radius: 2px;
+    &:nth-child(3) {
+      margin-right: 0;
+      margin-left: 20px;
+    }
   }
 
   &__min {
@@ -819,6 +877,9 @@
   max-width: 460px;
   width: 100%;
   margin-right: 20px;
+  @media screen and (max-width: 1200px) {
+    width: 250px;
+  }
 
   &__label {
     position: relative;
@@ -870,6 +931,8 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
+  flex-wrap: wrap;
+
 }
 
 .empty-pack {

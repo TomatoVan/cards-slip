@@ -101,7 +101,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
               )}
             </div>
             <div
-              className="packs__caption packs__caption--sorting"
+              className="packs__caption packs__caption--sorting packs__caption--lastUpdate"
               onClick={sortPacksByLastUpdate}
             >
               Last Update
@@ -112,7 +112,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
               )}
             </div>
             <div className="packs__caption">Created by</div>
-            <div className="packs__caption">Actions</div>
+            <div className="packs__caption ">Actions</div>
           </div>
           <div className="packs__list">
             {packs.map(el => {

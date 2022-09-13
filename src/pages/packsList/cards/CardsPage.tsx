@@ -128,7 +128,7 @@ export const CardsPage = () => {
             <div className="packs__caption">Question</div>
             <div className="packs__caption">Answer</div>
             <div className="packs__caption">Last Updated</div>
-            <div className="packs__caption">Grade</div>
+            <div className="packs__caption packs__caption--grade">Grade</div>
             <div className="packs__caption">Actions</div>
           </div>
           <div className="packs__list" />

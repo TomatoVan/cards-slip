@@ -38,12 +38,12 @@ export const Card = React.memo(
 
     return (
       <div className="pack">
-        <div className="pack__col cut">
+        <div className="pack__col pack__title cut">
           <Cover cover={questionImg} question={question} />
         </div>
         <div className="pack__col cut">{answer}</div>
         <div className="pack__col">{updatedDate}</div>
-        <div className="pack__col">
+        <div className="pack__col pack__col--rating">
           <Rating name="simple-controlled" value={grade} />
         </div>
         <div className="pack__col pack__col--actions">

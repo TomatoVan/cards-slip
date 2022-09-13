@@ -27,14 +27,17 @@ export const ClearAll = React.memo(({ accessoryQueryFilter }: PropsType) => {
   };
 
   return (
-    <div className="clearAll">
-      <IconButton
-        onClick={clearFiltersHandler}
-        aria-label="clearAll"
-        disabled={status === 'loading'}
-      >
-        <FilterAltOffTwoToneIcon fontSize="inherit" />
-      </IconButton>
+    <div>
+      <div className="search__title">Clear all</div>
+      <div className="clearAll">
+        <IconButton
+          onClick={clearFiltersHandler}
+          aria-label="clearAll"
+          disabled={status === 'loading'}
+        >
+          <FilterAltOffTwoToneIcon fontSize="inherit" />
+        </IconButton>
+      </div>
     </div>
   );
 });

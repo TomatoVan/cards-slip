@@ -67,31 +67,29 @@ export const RangeSlider = () => {
 
   return (
     <div>
-      <div>
-        <div className="slider slider__title">Number of cards</div>
-        <div className="slider slider__items">
-          <input
-            className="slider slider__input"
-            value={values[0].toString()}
-            onChange={handleMinInputChange}
-            type="number"
-          />
-          <Slider
-            min={minCardsCount}
-            max={maxCardsCount}
-            getAriaLabel={() => 'Temperature range'}
-            value={values}
-            onChangeCommitted={onChangeDoubleRange}
-            valueLabelDisplay="auto"
-            disabled={status === 'loading'}
-          />
-          <input
-            className="slider slider__input"
-            value={values[1].toString()}
-            onChange={handleMaxInputChange}
-            type="number"
-          />
-        </div>
+      <div className="slider slider__title">Number of cards</div>
+      <div className="slider slider__items">
+        <input
+          className="slider slider__input"
+          value={values[0].toString()}
+          onChange={handleMinInputChange}
+          type="number"
+        />
+        <Slider
+          min={minCardsCount}
+          max={maxCardsCount}
+          getAriaLabel={() => 'Temperature range'}
+          value={values}
+          onChangeCommitted={onChangeDoubleRange}
+          valueLabelDisplay="auto"
+          disabled={status === 'loading'}
+        />
+        <input
+          className="slider slider__input"
+          value={values[1].toString()}
+          onChange={handleMaxInputChange}
+          type="number"
+        />
       </div>
     </div>
   );

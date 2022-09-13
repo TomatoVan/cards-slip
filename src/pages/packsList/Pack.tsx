@@ -73,8 +73,8 @@ export const Pack = memo(
           </div>
         </div>
         <div className="pack__col">{cards}</div>
-        <div className="pack__col">{updatedDate}</div>
-        <div className="pack__col">{author}</div>
+        <div className="pack__col pack__col--lastUpdate">{updatedDate}</div>
+        <div className="pack__col pack__col--author">{author}</div>
         <div className="pack__col">
           <IconButton
             onClick={learnAboutPackHandler}
