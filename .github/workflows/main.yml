@@ -19,27 +19,27 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: install modules
-        run: npm install
+        run: yarn install
 
       - name: build production project
         if: always()
-        run: npm run build
+        run: yarn run build
 
       - name: linting typescript
         if: always()
-        run: npm run lint:ts
+        run: yarn run lint:ts
 
       - name: linting css
         if: always()
-        run: npm run lint:scss
+        run: yarn run lint:scss
 
       - name: unit testing
         if: always()
-        run: npm run test:unit
+        run: yarn run test:unit
 
       - name: build storybook
         if: always()
-        run: npm run storybook:build
+        run: yarn run storybook:build
 
 
 
