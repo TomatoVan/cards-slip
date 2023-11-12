@@ -16,7 +16,11 @@ import { Card } from './Card';
 import { getCards, setResetCardsParams } from './cardsReducer';
 import { EmptyPackPage } from './EmptyPackPage';
 
-export const CardsPage = () => {
+type PropsType = {
+  noAuth?: boolean;
+};
+
+export const CardsPage = ({ noAuth = false }: PropsType) => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -83,7 +87,7 @@ export const CardsPage = () => {
     );
   }
 
-  if (!isLoggedIn) return <Navigate to="/" />;
+  if (!isLoggedIn && !noAuth) return <Navigate to="/" />;
 
   return (
     <div className="cards">

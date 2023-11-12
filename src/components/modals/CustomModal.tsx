@@ -23,6 +23,7 @@ export const CustomModal = React.memo(
     return (
       <div>
         <Modal
+          data-testid="modal"
           open={open}
           onClose={onCloseHandler}
           aria-labelledby="modal-modal-title"
@@ -30,7 +31,9 @@ export const CustomModal = React.memo(
         >
           <div className="modals">
             <div className="modals__title">
-              <div className="cut">{title}</div>
+              <div data-testid="modal-title" className="cut">
+                {title}
+              </div>
               <CloseIcon onClick={onCloseHandler} />
             </div>
             <hr className="modals__hr" />

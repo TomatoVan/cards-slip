@@ -8,12 +8,16 @@ import { CustomButton } from '../../components/customButton/CustomButton';
 import { Filter } from '../../components/filter/Filter';
 import { AddAndEditPackModal } from '../../components/modals/AddAndEditPackModal';
 import { Pagination } from '../../components/pagination/Pagination';
-import { RangeSlider } from '../../components/rangeSlider/rangeSlider';
+import { RangeSlider } from '../../components/rangeSlider/RangeSlider';
 import { Search } from '../../components/search/Search';
 
 import { Packs } from './Packs';
 
-export const PacksPage = () => {
+type PropsType = {
+  noAuth?: boolean;
+};
+
+export const PacksPage = ({ noAuth = false }: PropsType) => {
   const status = useAppSelector(state => state.app.status);
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
@@ -27,7 +31,7 @@ export const PacksPage = () => {
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  if (!isLoggedIn) return <Navigate to="/" />;
+  if (!isLoggedIn && !noAuth) return <Navigate to="/" />;
 
   return (
     <div className="cards">

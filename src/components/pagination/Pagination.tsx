@@ -59,7 +59,7 @@ export const Pagination = React.memo(({ location }: PropsType) => {
   };
 
   return (
-    <div className="pagination">
+    <div data-testid="pagination" className="pagination">
       <div className="pagination__list">
         <Stack style={{ display: 'flex', flexWrap: 'wrap' }}>
           <table>

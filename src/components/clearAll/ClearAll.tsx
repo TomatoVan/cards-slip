@@ -27,7 +27,7 @@ export const ClearAll = React.memo(({ accessoryQueryFilter }: PropsType) => {
   };
 
   return (
-    <div>
+    <div data-testid="clearAll">
       <div className="search__title">Clear all</div>
       <div className="clearAll">
         <IconButton

@@ -11,7 +11,11 @@ import { logoutTC } from '../login/loginReducer';
 
 import { updateUserName } from './profileReducer';
 
-export const Profile = () => {
+type PropsType = {
+  noAuth?: boolean;
+};
+
+export const Profile = ({ noAuth = false }: PropsType) => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -32,7 +36,7 @@ export const Profile = () => {
     }
   };
 
-  if (!isLoggedIn) return <Navigate to="/" />;
+  if (!isLoggedIn && !noAuth) return <Navigate to="/" />;
 
   return (
     <div className="frame">

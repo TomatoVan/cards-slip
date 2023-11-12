@@ -4,6 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
+yarn.lock
+./yarn.lock
+/yarn.lock
+.yarn.lock
+.storybook-static
+/storybook-static
 
 # testing
 /coverage

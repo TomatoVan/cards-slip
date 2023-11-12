@@ -51,8 +51,10 @@ export const Filter = React.memo(({ accessoryQueryFilter }: PropsType) => {
   }, [accessoryQueryFilter]);
 
   return (
-    <div className="filter">
-      <div className="filter__title">Show packs cards</div>
+    <div data-testid="filter" className="filter">
+      <div data-testid="filter-title" className="filter__title">
+        Show packs cards
+      </div>
       <div className="filter__buttons">
         <Link to="/packs?accessory=My">
           <button

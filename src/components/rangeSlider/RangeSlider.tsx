@@ -67,7 +67,9 @@ export const RangeSlider = () => {
 
   return (
     <div>
-      <div className="slider slider__title">Number of cards</div>
+      <div data-testid="slider-title" className="slider slider__title">
+        Number of cards
+      </div>
       <div className="slider slider__items">
         <input
           className="slider slider__input"

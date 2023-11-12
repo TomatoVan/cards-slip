@@ -1,11 +1,11 @@
-@import 'fonts';
-@import 'reset';
-@import 'vars';
-@import 'main';
+@import "fonts";
+@import "reset";
+@import "vars";
+@import "main";
 
 body {
-  font-family: 'SFUIText', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: $bg;
+    font-family: SFUIText, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: $bg;
 }

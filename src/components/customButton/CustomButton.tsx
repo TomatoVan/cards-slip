@@ -15,6 +15,7 @@ export const CustomButton = React.memo(
 
     return (
       <button
+        data-testid="button"
         type={submit ? 'submit' : 'button'}
         disabled={disabled}
         className={`button button--${className}`}

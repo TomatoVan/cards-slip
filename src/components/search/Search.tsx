@@ -36,8 +36,11 @@ export const Search = React.memo(({ location }: PropsType) => {
   };
 
   return (
-    <div className="search">
-      <div className="search__title">Search</div>
+    <div data-testid="search" className="search">
+      <div data-testid="search-title" className="search__title">
+        Search
+      </div>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input" className="search__label">
         <input
           value={value}
