@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 17.x ]
+        node-version: [ 18.x ]
 
     steps:
       - uses: actions/checkout@v2
@@ -19,27 +19,27 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: install modules
-        run: yarn install
+        run: npm install --legacy-peer-deps
 
       - name: build production project
         if: always()
-        run: yarn run build
+        run: npm run build
 
       - name: linting typescript
         if: always()
-        run: yarn run lint:ts
+        run: npm run lint:ts
 
       - name: linting css
         if: always()
-        run: yarn run lint:scss
+        run: npm run lint:scss
 
       - name: unit testing
         if: always()
-        run: yarn run test:unit
+        run: npm run test:unit
 
       - name: build storybook
         if: always()
-        run: yarn run storybook:build
+        run: npm run storybook:build
 
 
 
