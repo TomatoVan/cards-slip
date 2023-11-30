@@ -151,7 +151,11 @@ export const addPack =
     currentFilter: string | null,
   ): AppThunkType =>
   async dispatch => {
-    const cardsPack = { name: packName, private: packPrivate, deckCover };
+    const cardsPack = {
+      name: packName,
+      userId: profileUserId,
+      isPrivate: packPrivate,
+    };
 
     dispatch(changeAppStatus('loading'));
     try {

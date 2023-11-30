@@ -33,6 +33,7 @@ type PropsType = {
 export const AddAndEditPackModal: FC<PropsType> = React.memo(
   ({ open, handleClose, title, id, name, deckCover, packWork }: PropsType) => {
     const profileUserId = useAppSelector(state => state.profile._id);
+
     const dispatch = useAppDispatch();
 
     // to find query

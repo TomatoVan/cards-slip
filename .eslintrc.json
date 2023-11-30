@@ -51,6 +51,7 @@
         "no-underscore-dangle": "off",
         "jsx-a11y/click-events-have-key-events": "off",
         "jsx-a11y/no-static-element-interactions": "off",
+        "class-methods-use-this": "off",
         "default-param-last": "off",
         "import/order": [
             "error",

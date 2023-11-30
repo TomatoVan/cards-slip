@@ -1,14 +1,27 @@
 import { instance } from './instance/instance';
 
 export const profileAPI = {
+  getData() {
+    return instance.get<UpdateUserResponseType>('auth/profile');
+  },
   updateData(data: UpdateDataType) {
-    return instance.put<UpdateUserResponseType>('auth/me', data);
+    return instance.patch<UpdateUserResponseType>('auth/profile', data);
   },
 };
 
 type UpdateDataType = {
   name: string;
   avatar?: string;
+};
+
+type UpdatedProfile = {
+  cardsCount: number;
+  created: string;
+  updated: string;
+  isAdmin: boolean;
+  name: string;
+  id: number;
+  password: string;
 };
 
 type UpdateUserResponseType = {

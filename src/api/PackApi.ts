@@ -2,19 +2,23 @@ import { instance } from './instance/instance';
 
 export const packApi = {
   getPacks(params: GetPackRequestType) {
-    return instance.get<PacksDataType>(`cards/pack`, { params: { ...params } });
+    return instance.get<PacksDataType>(`pack`, { params: { ...params } });
   },
-  addPack(cardsPack: { name: string; deckOver?: string; private?: boolean }) {
-    return instance.post<PackType>('cards/pack', { cardsPack });
+  addPack(cardsPack: { name: string; userId: string; isPrivate?: boolean }) {
+    return instance.post<PackType>('pack', {
+      name: cardsPack.name,
+      userId: cardsPack.userId,
+      isPrivate: cardsPack.isPrivate,
+    });
   },
   deletePack(params: { id: string }) {
-    return instance.delete('cards/pack', { params });
+    return instance.delete('pack', { params });
   },
   updatePack(cardsPack: { _id: string; name: string; private?: boolean }) {
-    return instance.put('cards/pack', { cardsPack });
+    return instance.put('pack', { cardsPack });
   },
   getPacksOfCertainUser(userId: string) {
-    return instance.get<PacksDataType>(`/cards/pack?user_id=${userId}`);
+    return instance.get<PacksDataType>(`pack?user_id=${userId}`);
   },
 };
 

@@ -1,4 +1,5 @@
-import { authAPI } from '../api/AuthApi';
+import { accessTokenService } from '../api/accessTokenService';
+import { profileAPI } from '../api/ProfileApi';
 import { AppThunkType } from '../common/types/types';
 import { setIsLoggedIn } from '../pages/login/loginReducer';
 import { setUserData } from '../pages/profile/profileReducer';
@@ -49,13 +50,22 @@ export const setSuccess = (success: string | null) => {
 
 export const initializeApp = (): AppThunkType => async dispatch => {
   try {
-    const auth = await authAPI.authMe();
+    // const auth = await authAPI.authMe();
+    const token = accessTokenService.getToken();
+    let profile;
 
-    dispatch(setIsLoggedIn(true, auth.data._id));
-    const { email, _id, name, publicCardPacksCount, avatar } = auth.data;
+    if (token) {
+      profile = await profileAPI.getData();
+      // @ts-ignore
+      dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
+      // @ts-ignore
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      const { email, id, name, cardsCount } = profile?.data;
 
-    if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
-    else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
+      // if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
+      // else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
+      dispatch(setUserData(email, id.toString(), name, cardsCount, null));
+    }
   } catch (err: any) {
     return;
   } finally {

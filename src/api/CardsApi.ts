@@ -2,7 +2,7 @@ import { instance } from './instance/instance';
 
 export const cardsApi = {
   getCards(packId: string, params: CardsParamsType) {
-    return instance.get<CardsType>(`cards/card?cardsPack_id=${packId}`, {
+    return instance.get<CardsType>(`card?cardsPack_id=${packId}`, {
       params: { ...params },
     });
   },
@@ -12,10 +12,10 @@ export const cardsApi = {
     answer: string;
     questionImg: string;
   }) {
-    return instance.post(`cards/card`, { card });
+    return instance.post(`card`, { card });
   },
   deleteCard(params: { id: string }) {
-    return instance.delete('cards/card', { params });
+    return instance.delete('card', { params });
   },
   updateCard(card: {
     _id: string;
@@ -23,10 +23,10 @@ export const cardsApi = {
     answer?: string;
     questionImg: string;
   }) {
-    return instance.put('cards/card', { card });
+    return instance.put('card', { card });
   },
   gradeCard(gradeData: GradeDataType) {
-    return instance.put<UpdatedGradeType>('cards/grade', gradeData);
+    return instance.put<UpdatedGradeType>('grade', gradeData);
   },
 };
 

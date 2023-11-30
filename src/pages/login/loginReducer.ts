@@ -1,5 +1,6 @@
+import { accessTokenService } from '../../api/accessTokenService';
 import { authAPI } from '../../api/AuthApi';
-import { LoginDataType } from '../../api/ProfileApi';
+import { LoginDataType, profileAPI } from '../../api/ProfileApi';
 import { changeAppStatus, setError } from '../../app/appReducer';
 import { AppThunkType } from '../../common/types/types';
 import { setUserData } from '../profile/profileReducer';
@@ -42,11 +43,18 @@ export const sendLoginData =
     try {
       const response = await authAPI.login(data);
 
-      dispatch(setIsLoggedIn(true, response.data._id));
-      const { email, _id, name, publicCardPacksCount, avatar } = response.data;
+      // @ts-ignore
+      accessTokenService.setToken(response.data.access_token);
+      const profile = await profileAPI.getData();
 
-      if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
-      else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
+      // @ts-ignore
+      dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
+      // @ts-ignore
+      const { email, id, name, cardsCount } = profile.data;
+
+      // if (avatar) dispatch(setUserData(email, id, name, cardsCount, avatar));
+      // else dispatch(setUserData(email, id, name, cardsCount, null));
+      dispatch(setUserData(email, id.toString(), name, cardsCount, null));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {
@@ -57,7 +65,8 @@ export const sendLoginData =
 export const logoutTC = (): AppThunkType => async dispatch => {
   dispatch(changeAppStatus('loading'));
   try {
-    await authAPI.logout();
+    // await authAPI.logout();
+    accessTokenService.deleteToken();
     dispatch(setIsLoggedIn(false));
   } catch (e: any) {
     dispatch(setError(e.response.data.error));
