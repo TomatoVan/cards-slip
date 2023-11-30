@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { CardType } from '../../api/CardsApi';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
 import { getCard } from '../../common/utils/smartRandomizer';
-import { Cover } from '../../components/cover/Cover';
 import { CustomButton } from '../../components/customButton/CustomButton';
-import { LocationStateType } from '../packsList/cards/CardsPage';
+import { LocationStateType, NewCardType } from '../packsList/cards/CardsPage';
 import { getCards, putCardGrade } from '../packsList/cards/cardsReducer';
 
 import { Grades } from './grades/Grades';
@@ -26,28 +24,17 @@ export const LearnPage = () => {
   const { id } = useParams<{ id: string }>();
   const { packName } = location.state as LocationStateType;
   const status = useAppSelector(state => state.app.status);
-  const cards = useAppSelector(state => state.cards.cards);
+  // @ts-ignore
+  const cards = useAppSelector(state => state.cards.cards) as NewCardType[];
 
-  const [card, setCard] = useState<CardType>({
-    _id: '',
-    cardsPack_id: '',
-    user_id: '',
+  const [card, setCard] = useState<NewCardType>({
     answer: '',
+    createdAt: '',
+    id: 0,
+    packId: 0,
     question: '',
-    grade: 0,
-    shots: 0,
-    questionImg: '',
-    answerImg: '',
-    answerVideo: '',
-    questionVideo: '',
-    comments: '',
-    type: '',
-    rating: 0,
-    more_id: '',
-    created: '',
-    updated: '',
-    __v: 0,
-    card_id: '',
+    updatedAt: '',
+    gradesList: [],
   });
 
   useEffect(() => {
@@ -57,7 +44,9 @@ export const LearnPage = () => {
       setFirst(false);
     }
 
-    if (cards.length > 0) setCard(getCard(cards));
+    if (cards.length > 0) {
+      setCard(getCard(cards));
+    }
   }, [dispatch, id, cards]);
 
   const navToPacksList = () => {
@@ -72,7 +61,15 @@ export const LearnPage = () => {
 
   const nextQuestion = () => {
     if (grade !== 0) {
-      if (id) dispatch(putCardGrade(id, { grade, card_id: card._id }));
+      if (id) {
+        dispatch(
+          putCardGrade(
+            id,
+            { grade, card_id: card.id?.toString() },
+            card.gradesList && card.gradesList[0]?.shots,
+          ),
+        );
+      }
       setShowAnswer(false);
       setGrade(0);
       setError('disabled');
@@ -94,7 +91,7 @@ export const LearnPage = () => {
                 {card.question === 'no question' ? (
                   <>
                     <b className="learn__item">Cover:</b>
-                    <Cover cover={card.questionImg} />
+                    {/* <Cover cover={card.questionImg} /> */}
                   </>
                 ) : (
                   <>
@@ -104,7 +101,8 @@ export const LearnPage = () => {
                 )}
               </div>
               <div className="learn__answer-count">
-                Attempts to answer the question: {card.shots}
+                Attempts to answer the question:{' '}
+                {card.gradesList && card.gradesList[0]?.shots}
               </div>
             </>
           )}

@@ -20,7 +20,7 @@ type PropsType = {
   noAuth?: boolean;
 };
 
-type newCardType = {
+export type NewCardType = {
   answer: string;
   createdAt: string;
   gradesList: Array<{
@@ -45,7 +45,7 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
   const location = useLocation();
 
   // @ts-ignore
-  const cards = useAppSelector(state => state.cards.cards) as newCardType[];
+  const cards = useAppSelector(state => state.cards.cards) as NewCardType[];
   const page = useAppSelector(state => state.cards.params.page);
   const cardQuestion = useAppSelector(state => state.cards.params.cardQuestion);
   const pageCount = useAppSelector(state => state.cards.params.pageCount);

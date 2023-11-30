@@ -195,18 +195,23 @@ export const changeCard =
   };
 
 export const putCardGrade =
-  (packId: string, gradeData: GradeDataType): AppThunkType =>
+  (packId: string, gradeData: GradeDataType, shots: number): AppThunkType =>
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
-      const response = await cardsApi.gradeCard(gradeData);
+      const response = await cardsApi.gradeCard(
+        packId,
+        gradeData.card_id,
+        gradeData.grade,
+        shots,
+      );
 
       dispatch(
         setUpdatedCard(response.data.updatedGrade, response.data.updatedGrade.card_id),
       );
       dispatch(getCards(packId, Infinity));
     } catch (err: any) {
-      dispatch(setError(err.response.data.error));
+      dispatch(setError(err.response?.data?.error));
     }
   };
 
