@@ -2,7 +2,7 @@ import { instance } from './instance/instance';
 
 export const cardsApi = {
   getCards(packId: string, params: CardsParamsType) {
-    return instance.get<CardsType>(`card?cardsPack_id=${packId}`, {
+    return instance.get<CardsType>(`pack/${packId}/card`, {
       params: { ...params },
     });
   },

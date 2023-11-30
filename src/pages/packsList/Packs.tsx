@@ -116,15 +116,21 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
           </div>
           <div className="packs__list">
             {packs.map(el => {
+              // @ts-ignore
               return (
                 <Pack
-                  key={el._id}
-                  id={el._id}
-                  authorId={el.user_id}
+                  // @ts-ignore
+                  key={el.id}
+                  // @ts-ignore
+                  id={el.id}
+                  // @ts-ignore
+                  authorId={el.userId.toString()}
                   name={el.name}
-                  author={el.user_name}
+                  // @ts-ignore
+                  author={el.userId}
                   cards={el.cardsCount}
-                  lastUploaded={el.updated}
+                  // @ts-ignore
+                  lastUploaded={el.updatedAt}
                   deckCover={el.deckCover}
                 />
               );

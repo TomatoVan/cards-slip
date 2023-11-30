@@ -86,7 +86,6 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
       />
     );
   }
-
   if (!isLoggedIn && !noAuth) return <Navigate to="/" />;
 
   return (
@@ -137,16 +136,26 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
           </div>
           <div className="packs__list" />
           {cards.map(el => {
+            // @ts-ignore
+            const gradeslist = el.gradesList;
+            // @ts-ignore
+            const gradeslistElem = el.gradesList && gradeslist[0];
+
             return (
               <Card
-                authorId={el.user_id}
+                // @ts-ignore
+                authorId={gradeslistElem?.userId}
                 packId={id}
-                cardId={el._id}
-                key={el._id}
+                // @ts-ignore
+                cardId={el.id}
+                // @ts-ignore
+                key={el.id}
                 question={el.question}
                 answer={el.answer}
-                grade={el.grade}
-                lastUpdated={el.updated}
+                // @ts-ignore
+                grade={gradeslistElem?.grade}
+                // @ts-ignore
+                lastUpdated={el.updatedAt}
                 questionImg={el.questionImg}
               />
             );

@@ -118,7 +118,8 @@ export const getCards =
         pageCount,
       });
 
-      dispatch(setCards({ ...response.data }));
+      // @ts-ignore
+      dispatch(setCards({ cards: response.data }));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

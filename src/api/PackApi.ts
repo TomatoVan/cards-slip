@@ -7,12 +7,13 @@ export const packApi = {
   addPack(cardsPack: { name: string; userId: string; isPrivate?: boolean }) {
     return instance.post<PackType>('pack', {
       name: cardsPack.name,
-      userId: cardsPack.userId,
+      userId: Number(cardsPack.userId),
       isPrivate: cardsPack.isPrivate,
     });
   },
   deletePack(params: { id: string }) {
-    return instance.delete('pack', { params });
+    // @ts-ignore
+    return instance.delete(`pack/${params.id}`);
   },
   updatePack(cardsPack: { _id: string; name: string; private?: boolean }) {
     return instance.put('pack', { cardsPack });

@@ -133,7 +133,8 @@ export const getPacks =
       const advancedOptions = { ...stateParams, ...params };
       const response = await packApi.getPacks(advancedOptions);
 
-      dispatch(setPacks({ ...response.data }));
+      // @ts-ignore
+      dispatch(setPacks({ cardPacks: response.data }));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
       dispatch(setIsLoggedIn(false));
