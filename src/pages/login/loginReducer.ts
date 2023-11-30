@@ -45,16 +45,16 @@ export const sendLoginData =
 
       // @ts-ignore
       accessTokenService.setToken(response.data.access_token);
-      const profile = await profileAPI.getData();
+      const token = accessTokenService.getToken();
 
-      // @ts-ignore
-      dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
-      // @ts-ignore
-      const { email, id, name, cardsCount } = profile.data;
+      if (token) {
+        const profile = await profileAPI.getData();
 
-      // if (avatar) dispatch(setUserData(email, id, name, cardsCount, avatar));
-      // else dispatch(setUserData(email, id, name, cardsCount, null));
-      dispatch(setUserData(email, id.toString(), name, cardsCount, null));
+        dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
+        const { email, id, name, cardsCount } = profile.data;
+
+        dispatch(setUserData(email, id.toString(), name, cardsCount, null));
+      }
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

@@ -84,9 +84,9 @@ export const Login = () => {
             />
           }
         />
-        <NavLink className="login__forgotLink" to="/password-recovery">
-          Forgot Password
-        </NavLink>
+        {/* <NavLink className="login__forgotLink" to="/password-recovery"> */}
+        {/*  Forgot Password */}
+        {/* </NavLink> */}
         <div className="submit">
           <CustomButton title="Sign in" disabled={status === 'loading'} submit />
         </div>

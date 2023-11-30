@@ -160,7 +160,7 @@ export const deleteCard =
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
-      await cardsApi.deleteCard({ id: cardId });
+      await cardsApi.deleteCard({ cardId, packId });
       dispatch(getCards(packId, pageCount));
       dispatch(setSuccess('Card successfully deleted'));
     } catch (err: any) {
@@ -184,7 +184,7 @@ export const changeCard =
 
     dispatch(changeAppStatus('loading'));
     try {
-      await cardsApi.updateCard(card);
+      await cardsApi.updateCard(card, packId);
       dispatch(getCards(packId, pageCount));
       dispatch(setSuccess('Card successfully changed'));
     } catch (err: any) {

@@ -20,13 +20,32 @@ type PropsType = {
   noAuth?: boolean;
 };
 
+type newCardType = {
+  answer: string;
+  createdAt: string;
+  gradesList: Array<{
+    cardId: number;
+    createdAt: string;
+    grade: number;
+    id: number;
+    shots: number;
+    updatedAt: string;
+    userId: number;
+  }>;
+  id: number;
+  packId: number;
+  question: string;
+  updatedAt: string;
+};
+
 export const CardsPage = ({ noAuth = false }: PropsType) => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const cards = useAppSelector(state => state.cards.cards);
+  // @ts-ignore
+  const cards = useAppSelector(state => state.cards.cards) as newCardType[];
   const page = useAppSelector(state => state.cards.params.page);
   const cardQuestion = useAppSelector(state => state.cards.params.cardQuestion);
   const pageCount = useAppSelector(state => state.cards.params.pageCount);
@@ -56,7 +75,6 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
       dispatch(getCards(id, pageCount));
     }
   }, [dispatch, page, cardQuestion, pageCount, sortCards, id]);
-
   // Modals
   const [open, setOpen] = useState(false);
 
@@ -136,27 +154,20 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
           </div>
           <div className="packs__list" />
           {cards.map(el => {
-            // @ts-ignore
             const gradeslist = el.gradesList;
-            // @ts-ignore
-            const gradeslistElem = el.gradesList && gradeslist[0];
+            const gradeslistElem = gradeslist && gradeslist[0];
 
             return (
               <Card
-                // @ts-ignore
-                authorId={gradeslistElem?.userId}
+                authorId={gradeslistElem?.userId?.toString()}
                 packId={id}
-                // @ts-ignore
-                cardId={el.id}
-                // @ts-ignore
+                cardId={el.id?.toString()}
                 key={el.id}
                 question={el.question}
                 answer={el.answer}
-                // @ts-ignore
                 grade={gradeslistElem?.grade}
-                // @ts-ignore
                 lastUpdated={el.updatedAt}
-                questionImg={el.questionImg}
+                questionImg=""
               />
             );
           })}

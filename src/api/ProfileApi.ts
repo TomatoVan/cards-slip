@@ -2,7 +2,7 @@ import { instance } from './instance/instance';
 
 export const profileAPI = {
   getData() {
-    return instance.get<UpdateUserResponseType>('auth/profile');
+    return instance.get<UpdatedProfile>('auth/profile');
   },
   updateData(data: UpdateDataType) {
     return instance.patch<UpdateUserResponseType>('auth/profile', data);
@@ -22,6 +22,7 @@ type UpdatedProfile = {
   name: string;
   id: number;
   password: string;
+  email: string;
 };
 
 type UpdateUserResponseType = {

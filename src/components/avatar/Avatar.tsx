@@ -2,7 +2,6 @@ import React, { ChangeEvent, useRef } from 'react';
 
 import { setError } from '../../app/appReducer';
 import defaultAvatar from '../../assets/img/avatar.png';
-import upload from '../../assets/img/uploadAvatar.svg';
 import { useAppDispatch } from '../../common/hooks/hooks';
 import { convertFileToBase64 } from '../../common/utils/Base64Converter';
 import { updateUserAvatar } from '../../pages/profile/profileReducer';
@@ -46,23 +45,23 @@ export const Avatar = React.memo(({ avatar }: PropsType) => {
         )}
       </div>
       <div>
-        <label htmlFor="avatar">
-          <input
-            id="avatar"
-            type="file"
-            accept={'image/*'}
-            onChange={uploadHandler}
-            ref={inputRef}
-            className="avatar__inputHide"
-          />
-          <input
-            className="avatar__icon"
-            type="image"
-            src={upload}
-            alt="upload"
-            onClick={selectFileHandler}
-          />
-        </label>
+        {/* <label htmlFor="avatar"> */}
+        {/*  <input */}
+        {/*    id="avatar" */}
+        {/*    type="file" */}
+        {/*    accept={'image/*'} */}
+        {/*    onChange={uploadHandler} */}
+        {/*    ref={inputRef} */}
+        {/*    className="avatar__inputHide" */}
+        {/*  /> */}
+        {/*  <input */}
+        {/*    className="avatar__icon" */}
+        {/*    type="image" */}
+        {/*    src={upload} */}
+        {/*    alt="upload" */}
+        {/*    onClick={selectFileHandler} */}
+        {/*  /> */}
+        {/* </label> */}
       </div>
     </div>
   );

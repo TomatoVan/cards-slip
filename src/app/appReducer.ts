@@ -50,20 +50,14 @@ export const setSuccess = (success: string | null) => {
 
 export const initializeApp = (): AppThunkType => async dispatch => {
   try {
-    // const auth = await authAPI.authMe();
     const token = accessTokenService.getToken();
     let profile;
 
     if (token) {
       profile = await profileAPI.getData();
-      // @ts-ignore
       dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
-      // @ts-ignore
-      // eslint-disable-next-line no-unsafe-optional-chaining
-      const { email, id, name, cardsCount } = profile?.data;
+      const { email, id, name, cardsCount } = profile.data;
 
-      // if (avatar) dispatch(setUserData(email, _id, name, publicCardPacksCount, avatar));
-      // else dispatch(setUserData(email, _id, name, publicCardPacksCount, null));
       dispatch(setUserData(email, id.toString(), name, cardsCount, null));
     }
   } catch (err: any) {

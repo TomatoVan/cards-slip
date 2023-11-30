@@ -16,7 +16,7 @@ export const packApi = {
     return instance.delete(`pack/${params.id}`);
   },
   updatePack(cardsPack: { _id: string; name: string; private?: boolean }) {
-    return instance.put('pack', { cardsPack });
+    return instance.patch('pack', { cardsPack });
   },
   getPacksOfCertainUser(userId: string) {
     return instance.get<PacksDataType>(`pack?user_id=${userId}`);

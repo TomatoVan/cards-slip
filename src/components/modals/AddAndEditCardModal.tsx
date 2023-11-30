@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl/FormControl';
 import { useFormik } from 'formik';
 
@@ -183,7 +182,7 @@ export const AddAndEditCardModal = React.memo(
                   onChange={selectHandleChange}
                 >
                   <MenuItem value="text">Text</MenuItem>
-                  <MenuItem value="img">Image</MenuItem>
+                  {/* <MenuItem value="img">Image</MenuItem> */}
                 </Select>
               </FormControl>
             </div>
@@ -208,20 +207,20 @@ export const AddAndEditCardModal = React.memo(
                   />
                 </div>
               ) : null}
-              <label htmlFor="cover">
-                <input
-                  id="cover"
-                  type="file"
-                  accept={'image/*'}
-                  onChange={uploadHandler}
-                  className="avatar__inputHide"
-                />
-                <div className="form__ContainerBtn">
-                  <Button component="span" variant="contained" className="form__coverBtn">
-                    Change cover
-                  </Button>
-                </div>
-              </label>
+              {/* <label htmlFor="cover"> */}
+              {/*  <input */}
+              {/*    id="cover" */}
+              {/*    type="file" */}
+              {/*    accept={'image/*'} */}
+              {/*    onChange={uploadHandler} */}
+              {/*    className="avatar__inputHide" */}
+              {/*  /> */}
+              {/*  <div className="form__ContainerBtn"> */}
+              {/*    <Button component="span" variant="contained" className="form__coverBtn"> */}
+              {/*      Change cover */}
+              {/*    </Button> */}
+              {/*  </div> */}
+              {/* </label> */}
             </div>
           )}
           <Input

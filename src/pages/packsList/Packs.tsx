@@ -13,10 +13,21 @@ type PropsType = {
   accessoryQueryFilter: string | null;
 };
 
+type newPackType = {
+  cardsCount: number;
+  createdAt: string;
+  id: number;
+  isPrivate: boolean;
+  name: string;
+  updatedAt: string;
+  userId: number;
+};
+
 export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsType) => {
   const dispatch = useAppDispatch();
 
-  const packs = useAppSelector(state => state.packs.cardPacks);
+  // @ts-ignore
+  const packs = useAppSelector(state => state.packs.cardPacks) as newPackType[];
   const userId = useAppSelector(state => state.packs.params.user_id);
   const profileUserId = useAppSelector(state => state.profile._id);
   const page = useAppSelector(state => state.packs.params.page);
@@ -119,19 +130,14 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
               // @ts-ignore
               return (
                 <Pack
-                  // @ts-ignore
                   key={el.id}
-                  // @ts-ignore
-                  id={el.id}
-                  // @ts-ignore
-                  authorId={el.userId.toString()}
+                  id={el.id?.toString()}
+                  authorId={el.userId?.toString()}
                   name={el.name}
-                  // @ts-ignore
-                  author={el.userId}
+                  author={el.userId?.toString()}
                   cards={el.cardsCount}
-                  // @ts-ignore
                   lastUploaded={el.updatedAt}
-                  deckCover={el.deckCover}
+                  deckCover=""
                 />
               );
             })}

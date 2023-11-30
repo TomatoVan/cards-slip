@@ -11,8 +11,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    if (accessToken) {
-      // @ts-ignore
+    if (accessToken && config?.headers) {
       // eslint-disable-next-line no-param-reassign
       config.headers.Authorization = `Bearer ${accessToken}`;
     }

@@ -12,18 +12,29 @@ export const cardsApi = {
     answer: string;
     questionImg: string;
   }) {
-    return instance.post(`card`, { card });
+    return instance.post(`pack/${card.cardsPack_id}/card`, {
+      question: card.question,
+      answer: card.answer,
+      packId: Number(card.cardsPack_id),
+    });
   },
-  deleteCard(params: { id: string }) {
-    return instance.delete('card', { params });
+  deleteCard(params: { cardId: string; packId: string }) {
+    return instance.delete(`pack/${params.packId}/card/${params.cardId}`);
   },
-  updateCard(card: {
-    _id: string;
-    question: string;
-    answer?: string;
-    questionImg: string;
-  }) {
-    return instance.put('card', { card });
+  updateCard(
+    card: {
+      _id: string;
+      question: string;
+      answer?: string;
+      questionImg: string;
+    },
+    packId: string,
+  ) {
+    return instance.patch(`pack/${packId}/card/${card._id}`, {
+      question: card.question,
+      answer: card.answer,
+      packId: Number(packId),
+    });
   },
   gradeCard(gradeData: GradeDataType) {
     return instance.put<UpdatedGradeType>('grade', gradeData);

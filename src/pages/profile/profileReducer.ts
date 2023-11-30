@@ -53,12 +53,13 @@ export const updateUserData = (name: string, avatar: string): any => {
 };
 
 export const updateUserName =
-  (name: string): AppThunkType =>
+  (name: string, email: string): AppThunkType =>
   async (dispatch, getState) => {
     dispatch(changeAppStatus('loading'));
     try {
       const { avatar } = getState().profile;
-      const response = await profileAPI.updateData({ name, avatar });
+      // @ts-ignore
+      const response = await profileAPI.updateData({ name });
       const updatedName = response.data.updatedUser.name;
 
       dispatch(updateUserData(updatedName, avatar));

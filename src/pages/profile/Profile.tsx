@@ -28,7 +28,8 @@ export const Profile = ({ noAuth = false }: PropsType) => {
   const status = useAppSelector(state => state.app.status);
 
   const logout = () => dispatch(logoutTC());
-  const updateUserInfoHandler = (newTitle: string) => dispatch(updateUserName(newTitle));
+  const updateUserInfoHandler = (newTitle: string) =>
+    dispatch(updateUserName(newTitle, email));
 
   const navToPacksList = () => {
     if (status === 'idle') {

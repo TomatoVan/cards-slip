@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useFormik } from 'formik';
@@ -162,20 +161,20 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
               />
             </div>
           ) : null}
-          <label htmlFor="cover">
-            <input
-              id="cover"
-              type="file"
-              accept={'image/*'}
-              onChange={uploadHandler}
-              className="avatar__inputHide"
-            />
-            <div className="form__ContainerBtn">
-              <Button component="span" variant="contained" className="form__coverBtn">
-                Change cover
-              </Button>
-            </div>
-          </label>
+          {/* <label htmlFor="cover"> */}
+          {/*  <input */}
+          {/*    id="cover" */}
+          {/*    type="file" */}
+          {/*    accept={'image/*'} */}
+          {/*    onChange={uploadHandler} */}
+          {/*    className="avatar__inputHide" */}
+          {/*  /> */}
+          {/*  <div className="form__ContainerBtn"> */}
+          {/*    <Button component="span" variant="contained" className="form__coverBtn"> */}
+          {/*      Change cover */}
+          {/*    </Button> */}
+          {/*  </div> */}
+          {/* </label> */}
           <Input
             placeholder="Pack name"
             {...formik.getFieldProps('packName')}
