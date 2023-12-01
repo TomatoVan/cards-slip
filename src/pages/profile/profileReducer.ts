@@ -58,13 +58,13 @@ export const updateUserName =
     dispatch(changeAppStatus('loading'));
     try {
       const { avatar } = getState().profile;
-      // @ts-ignore
-      const response = await profileAPI.updateData({ name });
-      const updatedName = response.data.updatedUser.name;
 
-      dispatch(updateUserData(updatedName, avatar));
+      await profileAPI.updateData({ name });
+      const profile = await profileAPI.getData();
+
+      dispatch(updateUserData(profile.data.name, avatar));
     } catch (err: any) {
-      dispatch(setError(err.response.data.error));
+      dispatch(setError(err?.response?.data.error));
     } finally {
       dispatch(changeAppStatus('idle'));
     }

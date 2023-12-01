@@ -199,16 +199,9 @@ export const putCardGrade =
   async dispatch => {
     dispatch(changeAppStatus('loading'));
     try {
-      const response = await cardsApi.gradeCard(
-        packId,
-        gradeData.card_id,
-        gradeData.grade,
-        shots,
-      );
+      await cardsApi.gradeCard(packId, gradeData.card_id, gradeData.grade, shots);
 
-      dispatch(
-        setUpdatedCard(response.data.updatedGrade, response.data.updatedGrade.card_id),
-      );
+      dispatch(setUpdatedCard(gradeData.grade, gradeData.card_id));
       dispatch(getCards(packId, Infinity));
     } catch (err: any) {
       dispatch(setError(err.response?.data?.error));

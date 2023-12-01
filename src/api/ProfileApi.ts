@@ -5,7 +5,7 @@ export const profileAPI = {
     return instance.get<UpdatedProfile>('auth/profile');
   },
   updateData(data: UpdateDataType) {
-    return instance.patch<UpdateUserResponseType>('auth/profile', data);
+    return instance.patch<UpdateUserResponseType>('auth/profile', { newName: data.name });
   },
 };
 

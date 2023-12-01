@@ -37,7 +37,7 @@ export const cardsApi = {
     });
   },
   gradeCard(packId: string, cardId: string, grade: number, shots: number) {
-    return instance.patch<UpdatedGradeType>(`pack/${packId}/card/${cardId}/grade`, {
+    return instance.patch<Array<number>>(`pack/${packId}/card/${cardId}/grade`, {
       grade,
       shots: shots ? Number(shots) + 1 : 1,
     });
