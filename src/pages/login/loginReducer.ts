@@ -43,11 +43,12 @@ export const sendLoginData =
     try {
       const response = await authAPI.login(data);
 
-      // @ts-ignore
-      accessTokenService.setToken(response.data.access_token);
+      if (response) {
+        accessTokenService.setToken(response.data.access_token);
+      }
       const token = accessTokenService.getToken();
 
-      if (token) {
+      if (token && response) {
         const profile = await profileAPI.getData();
 
         dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
