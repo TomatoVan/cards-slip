@@ -156,6 +156,8 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
           {cards.map(el => {
             const gradeslist = el.gradesList;
             const gradeslistElem = gradeslist && gradeslist[0];
+            // eslint-disable-next-line no-unsafe-optional-chaining
+            const gradeNum = gradeslistElem?.grade / gradeslistElem?.shots;
 
             return (
               <Card
@@ -165,7 +167,7 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
                 key={el.id}
                 question={el.question}
                 answer={el.answer}
-                grade={gradeslistElem?.grade}
+                grade={gradeNum}
                 lastUpdated={el.updatedAt}
                 questionImg=""
               />
