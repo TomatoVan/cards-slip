@@ -67,6 +67,8 @@ export const initializeApp = (): AppThunkType => async dispatch => {
   }
 };
 
+type TestType = {};
+
 type InitStateType = typeof initState;
 type ChangeAppStatusType = ReturnType<typeof changeAppStatus>;
 type SetIsInitializedType = ReturnType<typeof setIsInitialized>;
