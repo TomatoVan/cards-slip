@@ -130,7 +130,11 @@ export const getPacks =
     dispatch(changeAppStatus('loading'));
     try {
       const stateParams = getState().packs.params;
-      const advancedOptions = { ...stateParams, ...params, user_id: undefined };
+      const advancedOptions = {
+        ...stateParams,
+        ...params,
+        user_id: stateParams.user_id ? stateParams.user_id : undefined,
+      };
 
       const response = await packApi.getPacks(advancedOptions);
 
