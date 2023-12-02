@@ -43,19 +43,11 @@ export const sendLoginData =
     try {
       const response = await authAPI.login(data);
 
-      if (response) {
-        accessTokenService.setToken(response.data.access_token);
-      }
-      const token = accessTokenService.getToken();
+      accessTokenService.setToken(response.data.access_token);
+      dispatch(setIsLoggedIn(true, response.data.id.toString()));
+      const { email, id, name, cardsCount } = response.data;
 
-      if (token && response) {
-        const profile = await profileAPI.getData();
-
-        dispatch(setIsLoggedIn(true, profile?.data?.id.toString()));
-        const { email, id, name, cardsCount } = profile.data;
-
-        dispatch(setUserData(email, id.toString(), name, cardsCount, null));
-      }
+      dispatch(setUserData(email, id.toString(), name, cardsCount, null));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

@@ -13,7 +13,11 @@ type PropsType = {
   accessoryQueryFilter: string | null;
 };
 
-type newPackType = {
+type cardPacksTotalCount = {
+  cardPacksTotalCount: number;
+};
+
+type cardPacksData = {
   cardsCount: number;
   createdAt: string;
   id: number;
@@ -21,13 +25,22 @@ type newPackType = {
   name: string;
   updatedAt: string;
   userId: number;
+  user: {
+    name: string;
+  };
 };
 
 export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsType) => {
   const dispatch = useAppDispatch();
 
-  // @ts-ignore
-  const packs = useAppSelector(state => state.packs.cardPacks) as newPackType[];
+  const packs = useAppSelector(
+    // @ts-ignore
+    state => state.packs.cardPacks.cardPacks,
+  ) as cardPacksData[];
+  const cardPacksTotalCount = useAppSelector(
+    // @ts-ignore
+    state => state.packs.cardPacks.cardPacksTotalCount,
+  ) as cardPacksTotalCount;
   const userId = useAppSelector(state => state.packs.params.user_id);
   const profileUserId = useAppSelector(state => state.profile._id);
   const page = useAppSelector(state => state.packs.params.page);
@@ -41,9 +54,9 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
   const status = useAppSelector(state => state.app.status);
 
   // For empty elements
-  const emptySearchResults = packs.length === 0 && packName !== '';
+  const emptySearchResults = packs?.length === 0 && packName !== '';
   const emptySliderResults =
-    packs.length === 0 && (max !== maxCardsCount || min !== minCardsCount);
+    packs?.length === 0 && (max !== maxCardsCount || min !== minCardsCount);
 
   // Reset packs params  after page change
   useEffect(() => {
@@ -126,7 +139,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
             <div className="packs__caption ">Actions</div>
           </div>
           <div className="packs__list">
-            {packs.map(el => {
+            {packs?.map(el => {
               // @ts-ignore
               return (
                 <Pack
@@ -134,7 +147,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
                   id={el.id?.toString()}
                   authorId={el.userId?.toString()}
                   name={el.name}
-                  author={el.userId?.toString()}
+                  author={el.user.name}
                   cards={el.cardsCount}
                   lastUploaded={el.updatedAt}
                   deckCover=""

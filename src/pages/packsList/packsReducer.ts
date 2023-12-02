@@ -130,11 +130,17 @@ export const getPacks =
     dispatch(changeAppStatus('loading'));
     try {
       const stateParams = getState().packs.params;
-      const advancedOptions = { ...stateParams, ...params };
+      const advancedOptions = { ...stateParams, ...params, user_id: undefined };
+
       const response = await packApi.getPacks(advancedOptions);
 
-      // @ts-ignore
-      dispatch(setPacks({ cardPacks: response.data }));
+      dispatch(
+        setPacks({
+          // @ts-ignore
+          cardPacks: response.data,
+          cardPacksTotalCount: response.data.cardPacksTotalCount,
+        }),
+      );
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
       dispatch(setIsLoggedIn(false));

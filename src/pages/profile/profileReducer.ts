@@ -25,7 +25,11 @@ export const profileReducer = (
   switch (action.type) {
     case 'PROFILE/UPDATE_USER_DATA':
     case 'PROFILE/SET_USER_DATA': {
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        ...action.payload,
+        publicCardPacksCount: action.payload.cardsCount,
+      };
     }
     default:
       return state;
@@ -45,11 +49,28 @@ export const setUserData = (
   } as const;
 };
 
-export const updateUserData = (name: string, avatar: string): any => {
+export const updateUserData = (name: string, avatar: string, cardsCount: string): any => {
   return {
     type: 'PROFILE/UPDATE_USER_DATA',
-    payload: { name, avatar },
+    payload: { name, avatar, cardsCount },
   } as const;
+};
+
+export const updateUserProfile = (): AppThunkType => async (dispatch, getState) => {
+  dispatch(changeAppStatus('loading'));
+  try {
+    const { avatar } = getState().profile;
+
+    const profile = await profileAPI.getData();
+
+    dispatch(
+      updateUserData(profile.data.name, avatar, profile.data.cardsCount.toString()),
+    );
+  } catch (err: any) {
+    dispatch(setError(err?.response?.data.error));
+  } finally {
+    dispatch(changeAppStatus('idle'));
+  }
 };
 
 export const updateUserName =
@@ -62,7 +83,9 @@ export const updateUserName =
       await profileAPI.updateData({ name });
       const profile = await profileAPI.getData();
 
-      dispatch(updateUserData(profile.data.name, avatar));
+      dispatch(
+        updateUserData(profile.data.name, avatar, profile.data.cardsCount.toString()),
+      );
     } catch (err: any) {
       dispatch(setError(err?.response?.data.error));
     } finally {
@@ -75,11 +98,11 @@ export const updateUserAvatar =
   async (dispatch, getState) => {
     dispatch(changeAppStatus('loading'));
     try {
-      const { name } = getState().profile;
+      const { name, publicCardPacksCount } = getState().profile;
       const response = await profileAPI.updateData({ name, avatar });
       const updatedAvatar = response.data.updatedUser.avatar;
 
-      dispatch(updateUserData(name, updatedAvatar));
+      dispatch(updateUserData(name, updatedAvatar, publicCardPacksCount.toString()));
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
     } finally {

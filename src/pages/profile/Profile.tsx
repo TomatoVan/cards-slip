@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { CustomButton } from '../../components/customButton/CustomButton';
 import { EditableSpan } from '../../components/editableSpan/EditableSpan';
 import { logoutTC } from '../login/loginReducer';
 
-import { updateUserName } from './profileReducer';
+import { updateUserName, updateUserProfile } from './profileReducer';
 
 type PropsType = {
   noAuth?: boolean;
@@ -36,6 +36,10 @@ export const Profile = ({ noAuth = false }: PropsType) => {
       navigate('/packs?accessory=All');
     }
   };
+
+  useEffect(() => {
+    dispatch(updateUserProfile());
+  }, []);
 
   if (!isLoggedIn && !noAuth) return <Navigate to="/" />;
 

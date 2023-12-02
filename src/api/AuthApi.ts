@@ -8,7 +8,7 @@ export const authAPI = {
     return instance.delete<LogoutResponseType>('auth/me', {});
   },
   login(data: LoginDataType) {
-    return instance.post<{ access_token: string }>('auth/login', data);
+    return instance.post<LoginResponseDataType>('auth/login', data);
   },
   requestRecoveryLink(email: string) {
     return instance.post<SetNewPasswordType>(
@@ -52,6 +52,14 @@ type LogoutResponseType = {
 export type LoginDataType = {
   email: string;
   password: string;
+};
+
+export type LoginResponseDataType = {
+  email: string;
+  id: number;
+  name: string;
+  cardsCount: number;
+  access_token: string;
 };
 
 export type SetNewPasswordType = {
