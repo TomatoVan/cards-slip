@@ -3,6 +3,7 @@ import { sortingMethods } from '../../../api/PackApi';
 import { changeAppStatus, setError, setSuccess } from '../../../app/appReducer';
 import { AppStateType } from '../../../app/store';
 import { AppThunkType } from '../../../common/types/types';
+import { MAX_CARDS_NUM } from '../../../common/utils/const';
 
 const initState: CardsType = {
   cards: {
@@ -217,7 +218,7 @@ export const putCardGrade =
       await cardsApi.gradeCard(packId, gradeData.card_id, gradeData.grade, shots);
 
       dispatch(setUpdatedCard(gradeData.grade, gradeData.card_id));
-      dispatch(getCards(packId, Infinity));
+      dispatch(getCards(packId, MAX_CARDS_NUM));
     } catch (err: any) {
       dispatch(setError(err.response?.data?.error));
     }

@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
+import { MAX_CARDS_NUM } from '../../common/utils/const';
 import { getCard } from '../../common/utils/smartRandomizer';
 import { CustomButton } from '../../components/customButton/CustomButton';
 import { LocationStateType, NewCardType } from '../packsList/cards/CardsPage';
@@ -41,7 +42,7 @@ export const LearnPage = () => {
   useEffect(() => {
     if (first && id) {
       // should return all pack cards
-      dispatch(getCards(id, Infinity));
+      dispatch(getCards(id, MAX_CARDS_NUM));
       setFirst(false);
     }
 
