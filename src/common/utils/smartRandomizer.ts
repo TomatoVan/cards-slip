@@ -1,4 +1,3 @@
-import { CardType } from '../../api/CardsApi';
 import { NewCardType } from '../../pages/packsList/cards/CardsPage';
 
 export const getCard = (cards: NewCardType[]) => {

@@ -5,29 +5,32 @@ import { AppStateType } from '../../../app/store';
 import { AppThunkType } from '../../../common/types/types';
 
 const initState: CardsType = {
-  cards: [
-    {
-      _id: '',
-      cardsPack_id: '',
-      user_id: '',
-      answer: '',
-      question: '',
-      grade: 0,
-      shots: 0,
-      questionImg: '',
-      answerImg: '',
-      answerVideo: '',
-      questionVideo: '',
-      comments: 'n',
-      type: '',
-      rating: 0,
-      more_id: '',
-      created: '',
-      updated: '',
-      __v: 0,
-      card_id: '',
-    },
-  ],
+  cards: {
+    cards: [
+      {
+        _id: '',
+        cardsPack_id: '',
+        user_id: '',
+        answer: '',
+        question: '',
+        grade: 0,
+        shots: 0,
+        questionImg: '',
+        answerImg: '',
+        answerVideo: '',
+        questionVideo: '',
+        comments: 'n',
+        type: '',
+        rating: 0,
+        more_id: '',
+        created: '',
+        updated: '',
+        __v: 0,
+        card_id: '',
+      },
+    ],
+    cardsTotalCount: 0,
+  },
   packUserId: '',
   page: 1,
   pageCount: 7,
@@ -59,6 +62,9 @@ export const cardsReducer = (state = initState, action: CardsActionsType): Cards
     case 'CARDS/GET-PACKS-BY-TITLE': {
       return { ...state, params: { ...state.params, cardQuestion: action.title } };
     }
+    case 'CARDS/SET-SORT-CARDS': {
+      return { ...state, params: { ...state.params, sortCards: action.sortCards } };
+    }
     case 'CARDS/SET-RESET-CARDS-PARAMS': {
       return {
         ...state,
@@ -75,11 +81,14 @@ export const cardsReducer = (state = initState, action: CardsActionsType): Cards
     case 'CARDS/SET-UPDATED-CARD': {
       return {
         ...state,
-        cards: state.cards.map(card =>
-          card.card_id === action.payload.cardId
-            ? { ...card, ...action.payload.updatedGrade }
-            : card,
-        ),
+        cards: {
+          ...state.cards,
+          cards: state.cards.cards.map(card =>
+            card.card_id === action.payload.cardId
+              ? { ...card, ...action.payload.updatedGrade }
+              : card,
+          ),
+        },
       };
     }
     default:
@@ -107,6 +116,10 @@ export const setUpdatedCard = (updatedGrade: any, cardId: string) => {
   return { type: 'CARDS/SET-UPDATED-CARD', payload: { updatedGrade, cardId } } as const;
 };
 
+export const setCardsPacks = (sortCards: sortingMethods) => {
+  return { type: 'CARDS/SET-SORT-CARDS', sortCards } as const;
+};
+
 export const getCards =
   (packId: string, pageCount?: number): AppThunkType =>
   async (dispatch, getState: () => AppStateType) => {
@@ -130,6 +143,7 @@ export const getCards =
 export const addCard =
   (
     packId: string,
+    authorId: string,
     question: string,
     answer: string,
     questionImg: string,
@@ -138,6 +152,7 @@ export const addCard =
   async dispatch => {
     const card = {
       cardsPack_id: packId,
+      authorId,
       question,
       answer,
       questionImg,
@@ -213,9 +228,11 @@ type setPaginationType = ReturnType<typeof setCardsPagination>;
 type getCardsByTitleType = ReturnType<typeof getCardsByTitle>;
 type setResetCardsParamsType = ReturnType<typeof setResetCardsParams>;
 type SetUpdatedCardType = ReturnType<typeof setUpdatedCard>;
+type SetCardsPacksType = ReturnType<typeof setCardsPacks>;
 export type CardsActionsType =
   | SetCardsType
   | setPaginationType
   | getCardsByTitleType
   | setResetCardsParamsType
-  | SetUpdatedCardType;
+  | SetUpdatedCardType
+  | SetCardsPacksType;

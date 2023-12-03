@@ -8,6 +8,7 @@ export const cardsApi = {
   },
   postCard(card: {
     cardsPack_id: string;
+    authorId: string;
     question: string;
     answer: string;
     questionImg: string;
@@ -16,6 +17,7 @@ export const cardsApi = {
       question: card.question,
       answer: card.answer,
       packId: Number(card.cardsPack_id),
+      userId: Number(card.authorId),
     });
   },
   deleteCard(params: { cardId: string; packId: string }) {
@@ -53,7 +55,10 @@ export type CardsParamsType = {
 };
 
 export type CardsType = {
-  cards: CardType[];
+  cards: {
+    cardsTotalCount: number;
+    cards: CardType[];
+  };
   packUserId: string;
   page: number;
   pageCount: number;

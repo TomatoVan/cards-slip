@@ -37,10 +37,6 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
     // @ts-ignore
     state => state.packs.cardPacks.cardPacks,
   ) as cardPacksData[];
-  const cardPacksTotalCount = useAppSelector(
-    // @ts-ignore
-    state => state.packs.cardPacks.cardPacksTotalCount,
-  ) as cardPacksTotalCount;
   const userId = useAppSelector(state => state.packs.params.user_id);
   const profileUserId = useAppSelector(state => state.profile._id);
   const page = useAppSelector(state => state.packs.params.page);
@@ -128,7 +124,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
               className="packs__caption packs__caption--sorting packs__caption--lastUpdate"
               onClick={sortPacksByLastUpdate}
             >
-              Last Update
+              Last Updated
               {sortPacks === sortingMethods.ASC_UPDATE ? (
                 <ArrowDropUpOutlinedIcon fontSize="small" />
               ) : (

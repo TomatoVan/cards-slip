@@ -72,6 +72,7 @@ export const Card = React.memo(
           title="Edit card"
           packId={packId}
           cardId={cardId}
+          authorId={authorId}
           handleClose={closeEditModalHandler}
           open={editModalOpen}
           question={question}

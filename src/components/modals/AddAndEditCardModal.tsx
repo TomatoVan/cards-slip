@@ -24,6 +24,7 @@ type PropsType = {
   title: string;
   packId: string;
   cardId?: string;
+  authorId: string;
   question: string;
   answer: string;
   questionImg: string;
@@ -37,6 +38,7 @@ export const AddAndEditCardModal = React.memo(
     title,
     packId,
     cardId,
+    authorId,
     question,
     answer,
     questionImg,
@@ -154,7 +156,14 @@ export const AddAndEditCardModal = React.memo(
           );
         else
           dispatch(
-            addCard(packId, data.question, data.answer, data.questionImg, cardsPageCount),
+            addCard(
+              packId,
+              authorId,
+              data.question,
+              data.answer,
+              data.questionImg,
+              cardsPageCount,
+            ),
           );
 
         formik.resetForm();

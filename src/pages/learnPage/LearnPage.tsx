@@ -25,7 +25,7 @@ export const LearnPage = () => {
   const { packName } = location.state as LocationStateType;
   const status = useAppSelector(state => state.app.status);
   // @ts-ignore
-  const cards = useAppSelector(state => state.cards.cards) as NewCardType[];
+  const cards = useAppSelector(state => state.cards.cards.cards) as NewCardType[];
 
   const [card, setCard] = useState<NewCardType>({
     answer: '',
@@ -35,6 +35,7 @@ export const LearnPage = () => {
     question: '',
     updatedAt: '',
     gradesList: [],
+    userId: 0,
   });
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export const LearnPage = () => {
       setFirst(false);
     }
 
-    if (cards.length > 0) {
+    if (cards?.length > 0) {
       setCard(getCard(cards));
     }
   }, [dispatch, id, cards]);

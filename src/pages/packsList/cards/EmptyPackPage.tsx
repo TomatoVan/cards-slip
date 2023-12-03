@@ -60,6 +60,7 @@ export const EmptyPackPage = React.memo(
                 <AddAndEditCardModal
                   handleClose={handleClose}
                   open={open}
+                  authorId={userId}
                   title="Add new card"
                   packId={id}
                   answer=""

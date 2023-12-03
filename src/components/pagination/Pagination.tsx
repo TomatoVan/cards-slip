@@ -24,7 +24,7 @@ export const Pagination = React.memo(({ location }: PropsType) => {
   const [page, setPage] = useState(1);
 
   const totalCountPacks = useAppSelector(state => state.packs.params.cardPacksTotalCount);
-  const totalCountCards = useAppSelector(state => state.cards.cardsTotalCount);
+  const totalCountCards = useAppSelector(state => state.cards?.cards?.cardsTotalCount);
 
   const currentPlaceIsPacks = location === 'Packs';
 
