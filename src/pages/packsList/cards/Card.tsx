@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { Tooltip, Zoom } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
@@ -47,24 +48,28 @@ export const Card = React.memo(
           <Rating name="simple-controlled" value={grade} />
         </div>
         <div className="pack__col pack__col--actions">
-          <IconButton
-            onClick={openEditModalHandler}
-            className="pack__button pack__button--edit"
-            aria-label="edit"
-            size="small"
-            disabled={userId !== authorId || status === 'loading'}
-          >
-            <EditOutlinedIcon fontSize="inherit" />
-          </IconButton>
-          <IconButton
-            onClick={openDeleteModalHandler}
-            className="pack__button pack__button--del"
-            aria-label="delete"
-            size="small"
-            disabled={userId !== authorId || status === 'loading'}
-          >
-            <DeleteOutlineIcon fontSize="inherit" />
-          </IconButton>
+          <Tooltip TransitionComponent={Zoom} title="Edit">
+            <IconButton
+              onClick={openEditModalHandler}
+              className="pack__button pack__button--edit"
+              aria-label="edit"
+              size="small"
+              disabled={userId !== authorId || status === 'loading'}
+            >
+              <EditOutlinedIcon fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip TransitionComponent={Zoom} title="Delete">
+            <IconButton
+              onClick={openDeleteModalHandler}
+              className="pack__button pack__button--del"
+              aria-label="delete"
+              size="small"
+              disabled={userId !== authorId || status === 'loading'}
+            >
+              <DeleteOutlineIcon fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
         </div>
         <Stack direction="row" className="pack__col pack__col--actions" />
 

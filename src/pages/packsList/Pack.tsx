@@ -3,6 +3,7 @@ import React, { memo, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SchoolIcon from '@mui/icons-material/School';
+import { Tooltip, Zoom } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
@@ -86,35 +87,41 @@ export const Pack = memo(
         <div className="pack__col pack__col--lastUpdate">{updatedDate}</div>
         <div className="pack__col pack__col--author">{author}</div>
         <div className="pack__col">
-          <IconButton
-            onClick={learnAboutPackHandler}
-            className="pack__button pack__button--teach"
-            aria-label="learn"
-            size="small"
-            disabled={status === 'loading'}
-          >
-            <SchoolIcon fontSize="inherit" />
-          </IconButton>
+          <Tooltip TransitionComponent={Zoom} title="Start studying">
+            <IconButton
+              onClick={learnAboutPackHandler}
+              className="pack__button pack__button--teach"
+              aria-label="learn"
+              size="small"
+              disabled={status === 'loading'}
+            >
+              <SchoolIcon fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
           {userId === authorId && (
             <>
-              <IconButton
-                onClick={openEditModalHandler}
-                className="pack__button pack__button--edit"
-                disabled={status === 'loading'}
-                aria-label="edit"
-                size="small"
-              >
-                <EditIcon fontSize="inherit" />
-              </IconButton>
-              <IconButton
-                onClick={openDeleteModalHandler}
-                disabled={status === 'loading'}
-                className="pack__button pack__button--del"
-                aria-label="delete"
-                size="small"
-              >
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
+              <Tooltip TransitionComponent={Zoom} title="Edit">
+                <IconButton
+                  onClick={openEditModalHandler}
+                  className="pack__button pack__button--edit"
+                  disabled={status === 'loading'}
+                  aria-label="edit"
+                  size="small"
+                >
+                  <EditIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip TransitionComponent={Zoom} title="Delete">
+                <IconButton
+                  onClick={openDeleteModalHandler}
+                  disabled={status === 'loading'}
+                  className="pack__button pack__button--del"
+                  aria-label="delete"
+                  size="small"
+                >
+                  <DeleteIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
             </>
           )}
         </div>

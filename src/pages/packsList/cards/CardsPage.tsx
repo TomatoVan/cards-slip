@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import SchoolIcon from '@mui/icons-material/School';
+import { Tooltip, Zoom } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
@@ -132,14 +133,16 @@ export const CardsPage = ({ noAuth = false }: PropsType) => {
       <div className="cards__learn">
         <div className="cards__title">
           <div className="cards__name cut">{packName}</div>
-          <IconButton
-            onClick={learnAboutPackHandler}
-            className="pack__button pack__button--teach"
-            aria-label="learn"
-            disabled={status === 'loading'}
-          >
-            <SchoolIcon fontSize="inherit" />
-          </IconButton>
+          <Tooltip TransitionComponent={Zoom} title="Start studying">
+            <IconButton
+              onClick={learnAboutPackHandler}
+              className="pack__button pack__button--teach"
+              aria-label="learn"
+              disabled={status === 'loading'}
+            >
+              <SchoolIcon fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
         </div>
         <Cover cover={deckCover} cardTitleCover />
       </div>
