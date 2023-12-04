@@ -147,6 +147,7 @@ export const Packs: FC<PropsType> = React.memo(({ accessoryQueryFilter }: PropsT
                   cards={el.cardsCount}
                   lastUploaded={el.updatedAt}
                   deckCover=""
+                  isPrivate={el.isPrivate}
                 />
               );
             })}

@@ -27,10 +27,11 @@ type PropsType = {
   id?: string;
   name: string;
   deckCover: string;
+  isPrivate?: boolean;
 };
 
 export const AddAndEditPackModal: FC<PropsType> = React.memo(
-  ({ open, handleClose, title, id, name, deckCover, packWork }: PropsType) => {
+  ({ open, handleClose, title, id, name, deckCover, packWork, isPrivate }: PropsType) => {
     const profileUserId = useAppSelector(state => state.profile._id);
 
     const dispatch = useAppDispatch();
@@ -87,7 +88,7 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
     const formik = useFormik({
       initialValues: {
         packName: name,
-        privatePack: false,
+        privatePack: isPrivate || false,
         deckCover,
       },
       validate: values => {
@@ -97,7 +98,11 @@ export const AddAndEditPackModal: FC<PropsType> = React.memo(
         if (!values.packName) {
           errors.packName = 'Поле обязательно для заполнения';
         }
-        if (values.deckCover === deckCover && values.packName === name) {
+        if (
+          values.deckCover === deckCover &&
+          values.packName === name &&
+          isPrivate === values.privatePack
+        ) {
           errors.packName = 'Поле обязательно для изменения';
         }
         if (values.packName && values.packName.length > maxNameLength) {

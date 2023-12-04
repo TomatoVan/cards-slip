@@ -20,10 +20,20 @@ type PropsType = {
   id: string;
   authorId: string;
   deckCover: string | null;
+  isPrivate: boolean;
 };
 
 export const Pack = memo(
-  ({ id, name, cards, authorId, author, lastUploaded, deckCover }: PropsType) => {
+  ({
+    id,
+    name,
+    cards,
+    authorId,
+    author,
+    lastUploaded,
+    deckCover,
+    isPrivate,
+  }: PropsType) => {
     const updatedDate = new Date(lastUploaded).toLocaleDateString('ru');
 
     const navigate = useNavigate();
@@ -119,6 +129,7 @@ export const Pack = memo(
           handleClose={closeEditModalHandler}
           open={editModalOpen}
           packWork="edit"
+          isPrivate={isPrivate}
         />
         <DeletePackAndCard
           open={deleteModalOpen}

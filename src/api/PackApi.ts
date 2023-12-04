@@ -12,11 +12,13 @@ export const packApi = {
     });
   },
   deletePack(params: { id: string }) {
-    // @ts-ignore
     return instance.delete(`pack/${params.id}`);
   },
   updatePack(cardsPack: { _id: string; name: string; private?: boolean }) {
-    return instance.patch('pack', { cardsPack });
+    return instance.patch(`pack/${cardsPack._id}`, {
+      name: cardsPack.name,
+      isPrivate: cardsPack.private,
+    });
   },
   getPacksOfCertainUser(userId: string) {
     return instance.get<PacksDataType>(`pack?user_id=${userId}`);
