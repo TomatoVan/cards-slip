@@ -147,7 +147,9 @@ export const getPacks =
       );
     } catch (err: any) {
       dispatch(setError(err.response.data.error));
-      dispatch(setIsLoggedIn(false));
+      // dispatch(setIsLoggedIn(false));
+      // @ts-ignore
+      window.location.reload(true);
     } finally {
       dispatch(changeAppStatus('idle'));
     }
