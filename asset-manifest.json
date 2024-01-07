@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cards-slip/static/css/main.09d77879.css",
-    "main.js": "/cards-slip/static/js/main.8816d1b2.js",
+    "main.js": "/cards-slip/static/js/main.75abdf6b.js",
     "static/media/SFUIText-Semibold.woff": "/cards-slip/static/media/SFUIText-Semibold.df4855fdeebbfd730663.woff",
     "static/media/SFUIText-Medium.woff": "/cards-slip/static/media/SFUIText-Medium.7a83304e816b06d35492.woff",
     "static/media/SFUIText-Bold.woff": "/cards-slip/static/media/SFUIText-Bold.42a114dc81fbcbfb38c2.woff",
@@ -21,10 +21,10 @@
     "index.html": "/cards-slip/index.html",
     "static/media/eye.svg": "/cards-slip/static/media/eye.b30b1f6a2b20057708f4.svg",
     "main.09d77879.css.map": "/cards-slip/static/css/main.09d77879.css.map",
-    "main.8816d1b2.js.map": "/cards-slip/static/js/main.8816d1b2.js.map"
+    "main.75abdf6b.js.map": "/cards-slip/static/js/main.75abdf6b.js.map"
   },
   "entrypoints": [
     "static/css/main.09d77879.css",
-    "static/js/main.8816d1b2.js"
+    "static/js/main.75abdf6b.js"
   ]
 }
