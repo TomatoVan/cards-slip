@@ -77,15 +77,21 @@ export const Pack = memo(
 
     return (
       <div className="pack">
-        <div className="pack__col pack__title">
+        <div onClick={getCardsHandler} className="pack__col pack__title">
           <Cover cover={deckCover} />
           <div onClick={getCardsHandler} className="pack__name cut">
             {name}
           </div>
         </div>
-        <div className="pack__col">{cards}</div>
-        <div className="pack__col pack__col--lastUpdate">{updatedDate}</div>
-        <div className="pack__col pack__col--author">{author}</div>
+        <div onClick={getCardsHandler} className="pack__col">
+          {cards}
+        </div>
+        <div onClick={getCardsHandler} className="pack__col pack__col--lastUpdate">
+          {updatedDate}
+        </div>
+        <div onClick={getCardsHandler} className="pack__col pack__col--author">
+          {author}
+        </div>
         <div className="pack__col">
           <Tooltip TransitionComponent={Zoom} title="Start studying">
             <IconButton
